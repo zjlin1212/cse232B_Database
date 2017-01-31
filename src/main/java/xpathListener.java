@@ -7,73 +7,65 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface xpathListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by the {@code ApChildren}
+	 * Enter a parse tree produced by the {@code apRoot}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void enterApChildren(xpathParser.ApChildrenContext ctx);
+	void enterApRoot(xpathParser.ApRootContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ApChildren}
+	 * Exit a parse tree produced by the {@code apRoot}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void exitApChildren(xpathParser.ApChildrenContext ctx);
+	void exitApRoot(xpathParser.ApRootContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ApAll}
+	 * Enter a parse tree produced by the {@code apCurrent}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void enterApAll(xpathParser.ApAllContext ctx);
+	void enterApCurrent(xpathParser.ApCurrentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ApAll}
+	 * Exit a parse tree produced by the {@code apCurrent}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void exitApAll(xpathParser.ApAllContext ctx);
+	void exitApCurrent(xpathParser.ApCurrentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void enterDoc(xpathParser.DocContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void exitDoc(xpathParser.DocContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xpathParser#fname}.
-	 * @param ctx the parse tree
-	 */
-	void enterFname(xpathParser.FnameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xpathParser#fname}.
-	 * @param ctx the parse tree
-	 */
-	void exitFname(xpathParser.FnameContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code AllChildren}
+	 * Enter a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterAllChildren(xpathParser.AllChildrenContext ctx);
+	void enterAll(xpathParser.AllContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code AllChildren}
+	 * Exit a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitAllChildren(xpathParser.AllChildrenContext ctx);
+	void exitAll(xpathParser.AllContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code RpwithP}
+	 * Enter a parse tree produced by the {@code Rpcurrent}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterRpwithP(xpathParser.RpwithPContext ctx);
+	void enterRpcurrent(xpathParser.RpcurrentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code RpwithP}
+	 * Exit a parse tree produced by the {@code Rpcurrent}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitRpwithP(xpathParser.RpwithPContext ctx);
+	void exitRpcurrent(xpathParser.RpcurrentContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AttName}
+	 * labeled alternative in {@link xpathParser#rp}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttName(xpathParser.AttNameContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AttName}
+	 * labeled alternative in {@link xpathParser#rp}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttName(xpathParser.AttNameContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code TagName}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -87,17 +79,17 @@ public interface xpathListener extends ParseTreeListener {
 	 */
 	void exitTagName(xpathParser.TagNameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code RpAll}
+	 * Enter a parse tree produced by the {@code RpPrthsis}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterRpAll(xpathParser.RpAllContext ctx);
+	void enterRpPrthsis(xpathParser.RpPrthsisContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code RpAll}
+	 * Exit a parse tree produced by the {@code RpPrthsis}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitRpAll(xpathParser.RpAllContext ctx);
+	void exitRpPrthsis(xpathParser.RpPrthsisContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Parent}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -111,29 +103,17 @@ public interface xpathListener extends ParseTreeListener {
 	 */
 	void exitParent(xpathParser.ParentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Attribute}
+	 * Enter a parse tree produced by the {@code Rpfilter}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterAttribute(xpathParser.AttributeContext ctx);
+	void enterRpfilter(xpathParser.RpfilterContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Attribute}
+	 * Exit a parse tree produced by the {@code Rpfilter}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitAttribute(xpathParser.AttributeContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code RpChildren}
-	 * labeled alternative in {@link xpathParser#rp}.
-	 * @param ctx the parse tree
-	 */
-	void enterRpChildren(xpathParser.RpChildrenContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code RpChildren}
-	 * labeled alternative in {@link xpathParser#rp}.
-	 * @param ctx the parse tree
-	 */
-	void exitRpChildren(xpathParser.RpChildrenContext ctx);
+	void exitRpfilter(xpathParser.RpfilterContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Text}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -159,111 +139,131 @@ public interface xpathListener extends ParseTreeListener {
 	 */
 	void exitCurrent(xpathParser.CurrentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code TwoRp}
+	 * Enter a parse tree produced by the {@code Rproot}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterTwoRp(xpathParser.TwoRpContext ctx);
+	void enterRproot(xpathParser.RprootContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code TwoRp}
+	 * Exit a parse tree produced by the {@code Rproot}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitTwoRp(xpathParser.TwoRpContext ctx);
+	void exitRproot(xpathParser.RprootContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code RpFilter}
+	 * Enter a parse tree produced by the {@code RpAnd}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void enterRpFilter(xpathParser.RpFilterContext ctx);
+	void enterRpAnd(xpathParser.RpAndContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code RpFilter}
+	 * Exit a parse tree produced by the {@code RpAnd}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 */
-	void exitRpFilter(xpathParser.RpFilterContext ctx);
+	void exitRpAnd(xpathParser.RpAndContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilAnd}
+	 * Enter a parse tree produced by the {@code FilterEqual}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilAnd(xpathParser.FilAndContext ctx);
+	void enterFilterEqual(xpathParser.FilterEqualContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilAnd}
+	 * Exit a parse tree produced by the {@code FilterEqual}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilAnd(xpathParser.FilAndContext ctx);
+	void exitFilterEqual(xpathParser.FilterEqualContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilEqual}
+	 * Enter a parse tree produced by the {@code FilterNot}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilEqual(xpathParser.FilEqualContext ctx);
+	void enterFilterNot(xpathParser.FilterNotContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilEqual}
+	 * Exit a parse tree produced by the {@code FilterNot}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilEqual(xpathParser.FilEqualContext ctx);
+	void exitFilterNot(xpathParser.FilterNotContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilNot}
+	 * Enter a parse tree produced by the {@code FilterOr}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilNot(xpathParser.FilNotContext ctx);
+	void enterFilterOr(xpathParser.FilterOrContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilNot}
+	 * Exit a parse tree produced by the {@code FilterOr}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilNot(xpathParser.FilNotContext ctx);
+	void exitFilterOr(xpathParser.FilterOrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilOr}
+	 * Enter a parse tree produced by the {@code FilterAnd}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilOr(xpathParser.FilOrContext ctx);
+	void enterFilterAnd(xpathParser.FilterAndContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilOr}
+	 * Exit a parse tree produced by the {@code FilterAnd}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilOr(xpathParser.FilOrContext ctx);
+	void exitFilterAnd(xpathParser.FilterAndContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilIs}
+	 * Enter a parse tree produced by the {@code FilterRp}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilIs(xpathParser.FilIsContext ctx);
+	void enterFilterRp(xpathParser.FilterRpContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilIs}
+	 * Exit a parse tree produced by the {@code FilterRp}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilIs(xpathParser.FilIsContext ctx);
+	void exitFilterRp(xpathParser.FilterRpContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilwithP}
+	 * Enter a parse tree produced by the {@code FilterPrthsis}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilwithP(xpathParser.FilwithPContext ctx);
+	void enterFilterPrthsis(xpathParser.FilterPrthsisContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilwithP}
+	 * Exit a parse tree produced by the {@code FilterPrthsis}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilwithP(xpathParser.FilwithPContext ctx);
+	void exitFilterPrthsis(xpathParser.FilterPrthsisContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FilRp}
+	 * Enter a parse tree produced by the {@code FilterIs}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFilRp(xpathParser.FilRpContext ctx);
+	void enterFilterIs(xpathParser.FilterIsContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FilRp}
+	 * Exit a parse tree produced by the {@code FilterIs}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFilRp(xpathParser.FilRpContext ctx);
+	void exitFilterIs(xpathParser.FilterIsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoc(xpathParser.DocContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoc(xpathParser.DocContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void enterFilename(xpathParser.FilenameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void exitFilename(xpathParser.FilenameContext ctx);
 }

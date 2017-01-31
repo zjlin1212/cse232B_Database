@@ -15,73 +15,61 @@ public class xpathBaseListener implements xpathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApChildren(xpathParser.ApChildrenContext ctx) { }
+	@Override public void enterApRoot(xpathParser.ApRootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApChildren(xpathParser.ApChildrenContext ctx) { }
+	@Override public void exitApRoot(xpathParser.ApRootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApAll(xpathParser.ApAllContext ctx) { }
+	@Override public void enterApCurrent(xpathParser.ApCurrentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApAll(xpathParser.ApAllContext ctx) { }
+	@Override public void exitApCurrent(xpathParser.ApCurrentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDoc(xpathParser.DocContext ctx) { }
+	@Override public void enterAll(xpathParser.AllContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDoc(xpathParser.DocContext ctx) { }
+	@Override public void exitAll(xpathParser.AllContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFname(xpathParser.FnameContext ctx) { }
+	@Override public void enterRpcurrent(xpathParser.RpcurrentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFname(xpathParser.FnameContext ctx) { }
+	@Override public void exitRpcurrent(xpathParser.RpcurrentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAllChildren(xpathParser.AllChildrenContext ctx) { }
+	@Override public void enterAttName(xpathParser.AttNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAllChildren(xpathParser.AllChildrenContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRpwithP(xpathParser.RpwithPContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRpwithP(xpathParser.RpwithPContext ctx) { }
+	@Override public void exitAttName(xpathParser.AttNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -99,13 +87,13 @@ public class xpathBaseListener implements xpathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRpAll(xpathParser.RpAllContext ctx) { }
+	@Override public void enterRpPrthsis(xpathParser.RpPrthsisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRpAll(xpathParser.RpAllContext ctx) { }
+	@Override public void exitRpPrthsis(xpathParser.RpPrthsisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -123,25 +111,13 @@ public class xpathBaseListener implements xpathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAttribute(xpathParser.AttributeContext ctx) { }
+	@Override public void enterRpfilter(xpathParser.RpfilterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAttribute(xpathParser.AttributeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRpChildren(xpathParser.RpChildrenContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRpChildren(xpathParser.RpChildrenContext ctx) { }
+	@Override public void exitRpfilter(xpathParser.RpfilterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -171,109 +147,133 @@ public class xpathBaseListener implements xpathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTwoRp(xpathParser.TwoRpContext ctx) { }
+	@Override public void enterRproot(xpathParser.RprootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTwoRp(xpathParser.TwoRpContext ctx) { }
+	@Override public void exitRproot(xpathParser.RprootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRpFilter(xpathParser.RpFilterContext ctx) { }
+	@Override public void enterRpAnd(xpathParser.RpAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRpFilter(xpathParser.RpFilterContext ctx) { }
+	@Override public void exitRpAnd(xpathParser.RpAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilAnd(xpathParser.FilAndContext ctx) { }
+	@Override public void enterFilterEqual(xpathParser.FilterEqualContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilAnd(xpathParser.FilAndContext ctx) { }
+	@Override public void exitFilterEqual(xpathParser.FilterEqualContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilEqual(xpathParser.FilEqualContext ctx) { }
+	@Override public void enterFilterNot(xpathParser.FilterNotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilEqual(xpathParser.FilEqualContext ctx) { }
+	@Override public void exitFilterNot(xpathParser.FilterNotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilNot(xpathParser.FilNotContext ctx) { }
+	@Override public void enterFilterOr(xpathParser.FilterOrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilNot(xpathParser.FilNotContext ctx) { }
+	@Override public void exitFilterOr(xpathParser.FilterOrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilOr(xpathParser.FilOrContext ctx) { }
+	@Override public void enterFilterAnd(xpathParser.FilterAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilOr(xpathParser.FilOrContext ctx) { }
+	@Override public void exitFilterAnd(xpathParser.FilterAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilIs(xpathParser.FilIsContext ctx) { }
+	@Override public void enterFilterRp(xpathParser.FilterRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilIs(xpathParser.FilIsContext ctx) { }
+	@Override public void exitFilterRp(xpathParser.FilterRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilwithP(xpathParser.FilwithPContext ctx) { }
+	@Override public void enterFilterPrthsis(xpathParser.FilterPrthsisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilwithP(xpathParser.FilwithPContext ctx) { }
+	@Override public void exitFilterPrthsis(xpathParser.FilterPrthsisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFilRp(xpathParser.FilRpContext ctx) { }
+	@Override public void enterFilterIs(xpathParser.FilterIsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFilRp(xpathParser.FilRpContext ctx) { }
+	@Override public void exitFilterIs(xpathParser.FilterIsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDoc(xpathParser.DocContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDoc(xpathParser.DocContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFilename(xpathParser.FilenameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFilename(xpathParser.FilenameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

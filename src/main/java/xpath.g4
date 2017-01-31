@@ -2,64 +2,50 @@
  *
  *
  */
+/*
+grammar Expr;
+prog:	(expr NEWLINE)* ;
+expr:   expr ('*'|'/') expr
+    |	expr ('+'|'-')
 
+*/
 grammar xpath;
 
-ap
-	: doc '/' rp        # ApChildren
-	| doc '//' rp       # ApAll
-	;
 
-doc
-	: DOC '(' '"' fname '"' ')'
-	;
+ap:
+    doc  '/' rp     #apRoot
+|   doc '//' rp     #apCurrent
 
-fname
-	: NAME ('.' NAME)?
-	;
+;
+rp:
+    String          #TagName
+|   '*'             #All
+|   '.'             #Current
+|   '..'            #Parent
+|   'text()'        #Text
+|   '@' String      #AttName
+|   '(' rp ')'      #RpPrthsis
+|   rp '/' rp       #Rproot
+|   rp '//' rp      #Rpcurrent
+|   rp '[' filter ']'#Rpfilter
+|   rp ',' rp       #RpAnd
+;
 
-rp
-	: NAME                         # TagName
-	| '*'                          # AllChildren
-	| '.'                          # Current
-	| '..'                         # Parent
-	| TXT                          # Text
-	| '@' NAME                     # Attribute
-	| '(' rp ')'                   # RpwithP
-	| rp '/' rp                    # RpChildren
-	| rp '//' rp                   # RpAll
-	| rp '[' filter ']'            # RpFilter
-	| rp ',' rp                    # TwoRp
-	;
+filter:
+    rp              #FilterRp
+|   rp '=' rp       #FilterEqual
+|   rp 'eq' rp      #FilterEqual
+|   rp '==' rp      #FilterIs
+|   rp 'is' rp      #FilterIs
+|   '(' filter ')'  #FilterPrthsis
+|   filter 'and' filter #FilterAnd
+|   filter 'or' filter  #FilterOr
+|   'not' filter        #FilterNot
+;
 
-filter
-	: rp                           # FilRp
-	| rp '=' rp                    # FilEqual
-	| rp 'eq' rp                   # FilEqual
-	| rp '==' rp                   # FilIs
-	| rp 'is' rp                   # FilIs
-	| '(' filter ')'               # FilwithP
-	| filter 'and' filter          # FilAnd
-	| filter 'or' filter           # FilOr
-	| 'not' filter                 # FilNot
-	;
+doc: 'doc' '(' '"' filename '"' ')';
+filename: String ('.' String)?;
 
-NUM:    [0-9]+;
-DOC:	'document';
-TXT:	'text()';
-NAME:	[a-zA-Z0-9_-]+;
-OPAR: 	'(';
-CPAR: 	')';
-OBRAC:	'[';
-CBRAC:	']';
-DOT:	'.';
-DDOT:	'..';
-COMMA:	',';
-AT:		'@';
-PATH:	'/';
-DPATH:	'//';
-STAR:	'*';
-EQUL:	'=';
-DEQUL:	'==';
-NEWLINE:'\r'? '\n';
-WS  :   [ \t]+ -> skip;
+String:[a-zA-Z0-9_-]+;
+
+
