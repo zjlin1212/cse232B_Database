@@ -10,45 +10,40 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by the {@code ApChildren}
+	 * Visit a parse tree produced by the {@code apRoot}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApChildren(xpathParser.ApChildrenContext ctx);
+	T visitApRoot(xpathParser.ApRootContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ApAll}
+	 * Visit a parse tree produced by the {@code apCurrent}
 	 * labeled alternative in {@link xpathParser#ap}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApAll(xpathParser.ApAllContext ctx);
+	T visitApCurrent(xpathParser.ApCurrentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDoc(xpathParser.DocContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xpathParser#fname}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFname(xpathParser.FnameContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code AllChildren}
+	 * Visit a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAllChildren(xpathParser.AllChildrenContext ctx);
+	T visitAll(xpathParser.AllContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code RpwithP}
+	 * Visit a parse tree produced by the {@code Rpcurrent}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRpwithP(xpathParser.RpwithPContext ctx);
+	T visitRpcurrent(xpathParser.RpcurrentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AttName}
+	 * labeled alternative in {@link xpathParser#rp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttName(xpathParser.AttNameContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code TagName}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -57,12 +52,12 @@ public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTagName(xpathParser.TagNameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code RpAll}
+	 * Visit a parse tree produced by the {@code RpPrthsis}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRpAll(xpathParser.RpAllContext ctx);
+	T visitRpPrthsis(xpathParser.RpPrthsisContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Parent}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -71,19 +66,12 @@ public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParent(xpathParser.ParentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Attribute}
+	 * Visit a parse tree produced by the {@code Rpfilter}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAttribute(xpathParser.AttributeContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code RpChildren}
-	 * labeled alternative in {@link xpathParser#rp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRpChildren(xpathParser.RpChildrenContext ctx);
+	T visitRpfilter(xpathParser.RpfilterContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Text}
 	 * labeled alternative in {@link xpathParser#rp}.
@@ -99,66 +87,78 @@ public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCurrent(xpathParser.CurrentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code TwoRp}
+	 * Visit a parse tree produced by the {@code Rproot}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTwoRp(xpathParser.TwoRpContext ctx);
+	T visitRproot(xpathParser.RprootContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code RpFilter}
+	 * Visit a parse tree produced by the {@code RpAnd}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRpFilter(xpathParser.RpFilterContext ctx);
+	T visitRpAnd(xpathParser.RpAndContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilAnd}
+	 * Visit a parse tree produced by the {@code FilterEqual}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilAnd(xpathParser.FilAndContext ctx);
+	T visitFilterEqual(xpathParser.FilterEqualContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilEqual}
+	 * Visit a parse tree produced by the {@code FilterNot}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilEqual(xpathParser.FilEqualContext ctx);
+	T visitFilterNot(xpathParser.FilterNotContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilNot}
+	 * Visit a parse tree produced by the {@code FilterOr}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilNot(xpathParser.FilNotContext ctx);
+	T visitFilterOr(xpathParser.FilterOrContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilOr}
+	 * Visit a parse tree produced by the {@code FilterAnd}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilOr(xpathParser.FilOrContext ctx);
+	T visitFilterAnd(xpathParser.FilterAndContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilIs}
+	 * Visit a parse tree produced by the {@code FilterRp}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilIs(xpathParser.FilIsContext ctx);
+	T visitFilterRp(xpathParser.FilterRpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilwithP}
+	 * Visit a parse tree produced by the {@code FilterPrthsis}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilwithP(xpathParser.FilwithPContext ctx);
+	T visitFilterPrthsis(xpathParser.FilterPrthsisContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FilRp}
+	 * Visit a parse tree produced by the {@code FilterIs}
 	 * labeled alternative in {@link xpathParser#filter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFilRp(xpathParser.FilRpContext ctx);
+	T visitFilterIs(xpathParser.FilterIsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoc(xpathParser.DocContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFilename(xpathParser.FilenameContext ctx);
 }

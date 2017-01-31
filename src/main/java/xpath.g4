@@ -2,13 +2,6 @@
  *
  *
  */
-/*
-grammar Expr;
-prog:	(expr NEWLINE)* ;
-expr:   expr ('*'|'/') expr
-    |	expr ('+'|'-')
-
-*/
 grammar xpath;
 
 
