@@ -174,7 +174,10 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public ArrayList<Node> visitRpfilter(xpathParser.RpfilterContext ctx) { return visitChildren(ctx); }
+    @Override
+    public ArrayList<Node> visitRpfilter(xpathParser.RpfilterContext ctx) {
+
+    }
 
 
     public ArrayList<Node> visitText(xpathParser.TextContext ctx) {
@@ -222,55 +225,104 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
             return result;
 
     }
+
+    @Override
+    public ArrayList<Node> visitFilterEqual(xpathParser.FilterEqualContext ctx) {
+
+        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> result1 = visit(ctx.rp(0));
+        currentNodes = temp;
+        ArrayList<Node> result2 = visit(ctx.rp(1));
+        currentNodes = temp;
+        for(Node node0 : result1){
+            for(Node node1 : result2){
+                if(node0.isEqualNode(node1)){
+                     return temp;
+                }
+            }
+        }
+
+        return new ArrayList<>();
+    }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public ArrayList<Node> visitFilterEqual(xpathParser.FilterEqualContext ctx) { return visitChildren(ctx); }
+    @Override public ArrayList<Node> visitFilterNot(xpathParser.FilterNotContext ctx) {
+        ArrayList<Node> result = visit(ctx.filter());
+        if(result.isEmpty()){
+            return new ArrayList<>(currentNodes);
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public ArrayList<Node> visitFilterOr(xpathParser.FilterOrContext ctx) {
+        ArrayList<Node> result1 =  visit(ctx.filter(0));
+        ArrayList<Node> result2 =  visit(ctx.filter(1));
+        if(!result1.isEmpty()) {
+            return result1;
+        }
+        if(!result1.isEmpty()) {
+            return result2;
+        }
+        return new ArrayList<>();
+    }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public ArrayList<Node> visitFilterNot(xpathParser.FilterNotContext ctx) { return visitChildren(ctx); }
+    @Override
+    public ArrayList<Node> visitFilterAnd(xpathParser.FilterAndContext ctx) {
+         ArrayList<Node> result1 =  visit(ctx.filter(0));
+         ArrayList<Node> result2 =  visit(ctx.filter(1));
+         if(result1.isEmpty() || result2.isEmpty()){
+             return new ArrayList<>();
+         }
+         return result1;
+    }
+
+
+
+    @Override
+    public ArrayList<Node> visitFilterRp(xpathParser.FilterRpContext ctx) {
+        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> res = visit(ctx.rp());
+        currentNodes = temp;
+        return res;
+    }
+
+    @Override
+    public ArrayList<Node> visitFilterPrthsis(xpathParser.FilterPrthsisContext ctx) {
+        return visit(ctx.filter());
+    }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
-    @Override public ArrayList<Node> visitFilterOr(xpathParser.FilterOrContext ctx) { return visitChildren(ctx); }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override public ArrayList<Node> visitFilterAnd(xpathParser.FilterAndContext ctx) { return visitChildren(ctx); }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override public ArrayList<Node> visitFilterRp(xpathParser.FilterRpContext ctx) { return visitChildren(ctx); }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override public ArrayList<Node> visitFilterPrthsis(xpathParser.FilterPrthsisContext ctx) { return visitChildren(ctx); }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override public ArrayList<Node> visitFilterIs(xpathParser.FilterIsContext ctx) { return visitChildren(ctx); }
+    @Override
+    public ArrayList<Node> visitFilterIs(xpathParser.FilterIsContext ctx) {
+        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> result1 = visit(ctx.rp(0));
+        currentNodes = temp;
+        ArrayList<Node> result2 = visit(ctx.rp(1));
+        currentNodes = temp;
+        for(Node node0 : result1){
+            for(Node node1 : result2){
+                if(node0 == node1){
+                    return temp;
+                }
+            }
+        }
+
+        return new ArrayList<>();
+    }
 
     /**
      * {@inheritDoc}
