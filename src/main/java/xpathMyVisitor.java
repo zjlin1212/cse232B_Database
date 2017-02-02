@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
 public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     ArrayList<Node>  currentNodes  = new ArrayList<>();
-
+    boolean hasAttr;
     /*
      * {@inheritDoc}
      *
@@ -113,6 +113,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitAttName(xpathParser.AttNameContext ctx) {
+        hasAttr = true;
         ArrayList<Node> result = new ArrayList<>();
         for(Node node : currentNodes){
             Element element = (Element) node;
@@ -168,14 +169,21 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
            currentNodes = result;
            return result;
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
     @Override
     public ArrayList<Node> visitRpfilter(xpathParser.RpfilterContext ctx) {
+        ArrayList<Node> result = visit(ctx.rp());
+        ArrayList<Node> resultAtrfil= visit(ctx.filter());
+        if (hasAttr) {
+            currentNodes = resultAtrfil;
+            hasAttr= false;
+            return resultAtrfil;
+        }
+        else if (resultAtrfil.isEmpty()) {
+            return new ArrayList<>();
+        }
+        else return result;
+
 
     }
 
@@ -217,11 +225,8 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
             ArrayList<Node> currentCopy = new ArrayList<Node>(currentNodes);
             ArrayList<Node> result = visit(ctx.rp(0));
-
             currentNodes = currentCopy;
-
             result.addAll(visit(ctx.rp(1)));
-
             return result;
 
     }
@@ -244,12 +249,8 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
         return new ArrayList<>();
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
+
     @Override public ArrayList<Node> visitFilterNot(xpathParser.FilterNotContext ctx) {
         ArrayList<Node> result = visit(ctx.filter());
         if(result.isEmpty()){
@@ -270,12 +271,8 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         }
         return new ArrayList<>();
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
+
     @Override
     public ArrayList<Node> visitFilterAnd(xpathParser.FilterAndContext ctx) {
          ArrayList<Node> result1 =  visit(ctx.filter(0));
@@ -300,12 +297,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     public ArrayList<Node> visitFilterPrthsis(xpathParser.FilterPrthsisContext ctx) {
         return visit(ctx.filter());
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
     @Override
     public ArrayList<Node> visitFilterIs(xpathParser.FilterIsContext ctx) {
         ArrayList<Node> temp = currentNodes;
@@ -324,12 +316,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         return new ArrayList<>();
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
     @Override
     public ArrayList<Node> visitDoc(xpathParser.DocContext ctx) {
 
