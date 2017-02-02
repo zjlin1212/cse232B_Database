@@ -21,6 +21,7 @@ public class xPathtest {
         xpathMyVisitor eval = new xpathMyVisitor();
 
         ArrayList<Node> res = eval.visit(tree);
+        System.out.println(res.size());
         for(Node node : res) {
             System.out.println(node.getNodeValue());
         }

@@ -40,7 +40,17 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         public ArrayList<Node> visitApCurrent(xpathParser.ApCurrentContext ctx) {
         ArrayList<Node> result = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
+
         visit(ctx.doc());
+        result.addAll(currentNodes);
+        queue.addAll(currentNodes);
+        while(!queue.isEmpty()){
+            Node cur = queue.poll();
+            for(int i = 0; i < cur.getChildNodes().getLength(); i++) {
+                result.add(cur.getChildNodes().item(i));
+                queue.offer(cur.getChildNodes().item(i));
+            }
+        }
 
         currentNodes = result;
         return visit(ctx.rp());
