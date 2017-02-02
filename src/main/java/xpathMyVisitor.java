@@ -226,22 +226,36 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     @Override
     public ArrayList<Node> visitRpfilter(xpathParser.RpfilterContext ctx) {
 
-        ArrayList<Node> result = visit(ctx.rp());
+        visit(ctx.rp());
+        ArrayList<Node> currentCopy = new ArrayList<>(currentNodes);
 
-        ArrayList<Node> resultAtrfil= visit(ctx.filter());
-        if (hasAttr) {
-            currentNodes = resultAtrfil;
-            hasAttr= false;
-            return resultAtrfil;
-        }
-        else if (resultAtrfil.isEmpty()) {
-            currentNodes = new ArrayList<>();
-            return new ArrayList<>();
-        }
-        else return result;
+        ArrayList<Node> result = new ArrayList<>();
+        for (Node n : currentCopy) {
+            currentNodes.clear();
+            currentNodes.add(n);
+            if (!visit(ctx.filter()).isEmpty()) {
+                result.add(n);
+            }
 
+        }
+
+        currentNodes = result;
+        return result;
 
     }
+
+
+//        ArrayList<Node> resultAtrfil= visit(ctx.filter());
+//        if (hasAttr) {
+//            currentNodes = resultAtrfil;
+//            hasAttr= false;
+//            return resultAtrfil;
+//        }
+//        else if (resultAtrfil.isEmpty()) {
+//            currentNodes = new ArrayList<>();
+//            return new ArrayList<>();
+//        }
+//        else return result;
 
 
     public ArrayList<Node> visitText(xpathParser.TextContext ctx) {
@@ -295,7 +309,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     @Override
     public ArrayList<Node> visitFilterEqual(xpathParser.FilterEqualContext ctx) {
 
-        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> temp = new ArrayList<>(currentNodes);
         ArrayList<Node> result1 = visit(ctx.rp(0));
         currentNodes = temp;
         ArrayList<Node> result2 = visit(ctx.rp(1));
@@ -349,9 +363,18 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     @Override
     public ArrayList<Node> visitFilterRp(xpathParser.FilterRpContext ctx) {
         ArrayList<Node> temp = new ArrayList<>(currentNodes);
-        ArrayList<Node> res = visit(ctx.rp());
+        ArrayList<Node>  result =  visit(ctx.rp());
         currentNodes = temp;
-        return res;
+        if( result.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return result;
+        }
+
+        //        ArrayList<Node> temp = new ArrayList<>(currentNodes);
+        //        ArrayList<Node> res = visit(ctx.rp());
+        //        currentNodes = temp;
+        //        return res;
     }
 
     @Override
@@ -361,7 +384,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitFilterIs(xpathParser.FilterIsContext ctx) {
-        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> temp = new ArrayList<>(currentNodes);
         ArrayList<Node> result1 = visit(ctx.rp(0));
         currentNodes = temp;
         ArrayList<Node> result2 = visit(ctx.rp(1));

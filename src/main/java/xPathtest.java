@@ -10,7 +10,7 @@ import org.w3c.dom.Node;
 public class xPathtest {
     public static void main(String[] args) {
 
-        String Xpath = "doc(\"j_caesar.xml\")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE";
+        String Xpath = "doc(\"j_caesar.xml\")//ACT[(./TITLE)eq(./TITLE)]";
         ANTLRInputStream input = new ANTLRInputStream(Xpath);
         xpathLexer lexer = new xpathLexer(input);
 
