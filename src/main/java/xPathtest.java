@@ -10,7 +10,7 @@ import org.w3c.dom.Node;
 public class xPathtest {
     public static void main(String[] args) {
 
-        String Xpath = "doc(\"j_caesar.xml\")//(ACT,PERSONAE)/TITLE";
+        String Xpath = "doc(\"j_caesar.xml\")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE";
         ANTLRInputStream input = new ANTLRInputStream(Xpath);
         xpathLexer lexer = new xpathLexer(input);
 
@@ -23,7 +23,15 @@ public class xPathtest {
         ArrayList<Node> res = eval.visit(tree);
         System.out.println(res.size());
         for(Node node : res) {
-            System.out.println(node.getNodeValue());
+            System.out.println(node.getNodeName() + " " + node.getNodeValue());
+
+            for(int i = 0; i < node.getChildNodes().getLength(); i++){
+                if(node.getChildNodes().item(i).getNodeType() == Node.TEXT_NODE){
+                    System.out.println(node.getChildNodes().item(i).getNodeValue());
+                }
+
+            }
+
         }
     }
 }

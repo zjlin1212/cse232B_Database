@@ -23,8 +23,48 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
      * <p>The default implementation returns the result of calling
      * {@link #visitChildren} on {@code ctx}.</p>
      */
+    private ArrayList<Node> unique(ArrayList<Node> nodes) {
+        ArrayList<Node> res = new ArrayList<>();
+        for(Node n : nodes) {
+            if(!res.contains(n))
+                res.add(n);
+        }
+        return res;
+    }
 
 
+    @Override
+    public ArrayList<Node> visitDoc(xpathParser.DocContext ctx) {
+
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dB = null;
+        String seeme = ctx.filename().getText();
+        File fileXml = new File(ctx.filename().getText());
+        Document doc = null;
+        ArrayList<Node> result = new ArrayList<>();
+
+        try {
+            dB = docBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (dB != null) {
+                doc = dB.parse(fileXml);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        if (doc != null) {
+            doc.getDocumentElement().normalize();
+        }
+
+        result.add(doc);
+        currentNodes = result;
+        return result;
+
+    }
 
 
     @Override
@@ -46,14 +86,16 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         queue.addAll(currentNodes);
         while(!queue.isEmpty()){
             Node cur = queue.poll();
+            int curn = cur.getChildNodes().getLength();
             for(int i = 0; i < cur.getChildNodes().getLength(); i++) {
                 result.add(cur.getChildNodes().item(i));
                 queue.offer(cur.getChildNodes().item(i));
             }
         }
-
+        //unique(result);
         currentNodes = result;
-        return visit(ctx.rp());
+        ArrayList<Node> result2 = visit(ctx.rp());
+        return result2;
 
 
     }
@@ -145,9 +187,10 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
                 Node child = cur.getChildNodes().item(i);
                 if (child.getNodeType() == Node.ELEMENT_NODE) {
                     Element e = (Element) child;
-                    if(e.getTagName().equals(ctx.String().getText())) ;
+                    if (e.getTagName().equals(ctx.String().getText())) {
+                        result.add(child);
+                    }
                 }
-                result.add(child);
             }
         }
         currentNodes = result;
@@ -182,7 +225,9 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitRpfilter(xpathParser.RpfilterContext ctx) {
+
         ArrayList<Node> result = visit(ctx.rp());
+
         ArrayList<Node> resultAtrfil= visit(ctx.filter());
         if (hasAttr) {
             currentNodes = resultAtrfil;
@@ -190,6 +235,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
             return resultAtrfil;
         }
         else if (resultAtrfil.isEmpty()) {
+            currentNodes = new ArrayList<>();
             return new ArrayList<>();
         }
         else return result;
@@ -235,8 +281,13 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
             ArrayList<Node> currentCopy = new ArrayList<Node>(currentNodes);
             ArrayList<Node> result = visit(ctx.rp(0));
+            ArrayList<Node> currentNodesForRp1 = new ArrayList<Node>(currentNodes);
+
             currentNodes = currentCopy;
-            result.addAll(visit(ctx.rp(1)));
+            ArrayList<Node>  result2 = visit(ctx.rp(1));
+
+            result.addAll(result2);
+            currentNodes.addAll(currentNodesForRp1);
             return result;
 
     }
@@ -297,7 +348,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitFilterRp(xpathParser.FilterRpContext ctx) {
-        ArrayList<Node> temp = currentNodes;
+        ArrayList<Node> temp = new ArrayList<>(currentNodes);
         ArrayList<Node> res = visit(ctx.rp());
         currentNodes = temp;
         return res;
@@ -327,39 +378,6 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     }
 
 
-    @Override
-    public ArrayList<Node> visitDoc(xpathParser.DocContext ctx) {
-
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dB = null;
-        File fileXml = new File(ctx.filename().getText());
-        Document doc = null;
-        ArrayList<Node> result = new ArrayList<>();
-
-        try {
-            dB = docBuilderFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            if (dB != null) {
-                doc = dB.parse(fileXml);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        if (doc != null) {
-            doc.getDocumentElement().normalize();
-        }
-
-        result.add(doc);
-        currentNodes = result;
-        return result;
-
-
-
-    }
     /**
      * {@inheritDoc}
      *
