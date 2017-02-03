@@ -33,6 +33,9 @@ public class xPathtest {
                     //System.out.println(node.getChildNodes().item(i).getNodeValue());
                     writer.println(node.getChildNodes().item(i).getNodeValue());
                 }
+                if(node.getChildNodes().item(i).getNodeType() == Node.ATTRIBUTE_NODE){
+                    writer.println(node.getChildNodes().item(i).getAttributes());
+                }
 
             }
 
@@ -44,7 +47,7 @@ public class xPathtest {
         //String Xpath = "doc(\"j_caesar.xml\")//ACT[(./TITLE)eq(./TITLE)]";
         //ANTLRInputStream input = new ANTLRInputStream(Xpath);
 
-        String Filepath = "testFile";
+        String Filepath  = "testFile";
         ArrayList<String> files = new ArrayList<>();
         String line;
 

@@ -8,7 +8,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.Attr;
 
 /**
  * Created by kaiyizhang on 1/31/17.
@@ -165,17 +167,21 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitAttName(xpathParser.AttNameContext ctx) {
-        hasAttr = true;
+        //hasAttr = true;
         ArrayList<Node> result = new ArrayList<>();
         for(Node node : currentNodes){
             Element element = (Element) node;
-            String value = element.getAttribute(ctx.String().getText());
-            if(!value.isEmpty()){
-                result.add(node);
+            //String value = element.getAttribute(ctx.String().getText());
+            if(element.hasAttributes()){
+                NamedNodeMap map = element.getAttributes();
+                for(int i = 0; i < map.getLength(); i++) {
+                    result.add(map.item(i));
+                }
+
             }
 
         }
-
+        currentNodes = new ArrayList<>(result);
         return result;
     }
 
@@ -214,7 +220,13 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
            ArrayList<Node>  result = new ArrayList<>();
 
            for(Node node : currentNodes) {
-               Node parent = node.getParentNode();
+               Node parent = null;
+               if(node.getNodeType() == Node.ATTRIBUTE_NODE){
+                   parent =((Attr) node).getOwnerElement();
+               }else {
+                   parent = node.getParentNode();
+
+               }
                if (!result.contains(parent)) {
                    result.add(parent);
                }
@@ -341,7 +353,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         if(!result1.isEmpty()) {
             return result1;
         }
-        if(!result1.isEmpty()) {
+        if(!result2.isEmpty()) {
             return result2;
         }
         return new ArrayList<>();
