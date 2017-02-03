@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore>
+
+    <book>
+        <title>xml</title>
+        <price>xml</price>
+        <xxx>xml</xxx>
+
+
+    </book>
+
+    <book>
+        <title>Harry Potter</title>
+        <price>Harry Potter</price>
+        <xxx>xml</xxx>
+
+    </book>
+
+    <book name="ds">
+        <title lang="en">Learning XML</title>
+        <price>xxx</price>
+        <title>xml</title>
+        <price>ooo</price>
+    </book>
+
+</bookstore>

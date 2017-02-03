@@ -3,3 +3,6 @@ doc("j_caesar.xml")//ACT[./TITLE]/*/SPEECH/../TITLE
 doc("j_caesar.xml")//ACT[./TITLE]/*/SPEECH/../*/.././TITLE
 doc("j_caesar.xml")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE
 doc("j_caesar.xml")//ACT[not(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE
+doc("book.xml")//title/text()
+doc("book.xml")//book/@name
+doc("book.xml")//book[((./title/text())eq(./price/text()))and((./title/text())eq(./xxx/text()))]

@@ -27,18 +27,22 @@ public class xPathtest {
         writer.println("Total Node size is " + res.size());
         for(Node node : res) {
             //System.out.println(node.getNodeName() + " " + node.getNodeValue());
-            writer.println(node.getNodeName() + " " + node.getNodeValue());
-            for(int i = 0; i < node.getChildNodes().getLength(); i++){
-                if(node.getChildNodes().item(i).getNodeType() == Node.TEXT_NODE){
-                    //System.out.println(node.getChildNodes().item(i).getNodeValue());
-                    writer.println(node.getChildNodes().item(i).getNodeValue());
-                }
-                if(node.getChildNodes().item(i).getNodeType() == Node.ATTRIBUTE_NODE){
-                    writer.println(node.getChildNodes().item(i).getAttributes());
-                }
+            if(node.getNodeType() == Node.ATTRIBUTE_NODE){
+                writer.print("ATTRIBUTE_NODE : ");
+                writer.println(node.getNodeName() + " " + "\""+ node.getNodeValue() + "\"");
+            }else if(node.getNodeType() == Node.TEXT_NODE){
+                writer.print("TEXT_NODE : ");
+                writer.println("\"" + node.getNodeValue()+ "\"");
+            } else {
+                writer.print("<" + node.getNodeName() + "> : ");
+                for (int i = 0; i < node.getChildNodes().getLength(); i++) {
+                    if (node.getChildNodes().item(i).getNodeType() == Node.TEXT_NODE) {
+                        writer.println(node.getChildNodes().item(i).getNodeValue());
+                    }
 
+
+                }
             }
-
         }
         return res.size();
     }
