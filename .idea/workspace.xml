@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5fbfad19-3f5f-4164-83e1-0e49427abffb" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/outputFile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/xpathMyVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/antlrtutorial-1.0-SNAPSHOT.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/uber-antlrtutorial-1.0-SNAPSHOT.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/xPathtest.class" afterPath="$PROJECT_DIR$/target/classes/xPathtest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/xpathMyVisitor.class" afterPath="$PROJECT_DIR$/target/classes/xpathMyVisitor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/xPathtest.java" afterPath="$PROJECT_DIR$/src/main/java/xPathtest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/xpath.g4" afterPath="$PROJECT_DIR$/src/main/java/xpath.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testFile" afterPath="$PROJECT_DIR$/testFile" />
-    </list>
+    <list default="true" id="5fbfad19-3f5f-4164-83e1-0e49427abffb" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,45 +23,18 @@
             <state relative-caret-position="210">
               <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
               <folding>
-                <element signature="e#0#829#0" expanded="true" />
+                <element signature="e#0#828#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xquery.g4" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/xquery.g4">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="xpathMyVisitor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="xpathMyVisitor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/xpathMyVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3165">
-              <caret line="221" column="11" lean-forward="false" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
-              <folding>
-                <element signature="e#7350#7351#0" expanded="false" />
-                <element signature="e#7385#7386#0" expanded="false" />
-                <element signature="e#9939#9940#0" expanded="false" />
-                <element signature="e#9981#9982#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="xqueryMyVisitor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/xqueryMyVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-604">
-              <caret line="345" column="39" lean-forward="false" selection-start-line="344" selection-start-column="39" selection-end-line="345" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="236">
+              <caret line="404" column="38" lean-forward="true" selection-start-line="404" selection-start-column="38" selection-end-line="404" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,9 +103,9 @@
         <option value="$PROJECT_DIR$/src/main/java/xpath.g4" />
         <option value="$PROJECT_DIR$/src/main/java/xqueryMyVister.java" />
         <option value="$PROJECT_DIR$/src/main/java/xqueryBaseVisitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/xpathMyVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/xquery.g4" />
         <option value="$PROJECT_DIR$/src/main/java/xqueryMyVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/xpathMyVisitor.java" />
       </list>
     </option>
   </component>
@@ -184,7 +145,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="29" />
+    <option name="x" value="32" />
+    <option name="y" value="108" />
     <option name="width" value="1280" />
     <option name="height" value="725" />
   </component>
@@ -533,8 +495,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="29" width="1280" height="725" extended-state="6" />
-    <editor active="false" />
+    <frame x="32" y="108" width="1280" height="725" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -551,7 +513,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26979" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27059773" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -612,7 +574,7 @@
         <state relative-caret-position="345">
           <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
           <folding>
-            <element signature="e#0#829#0" expanded="true" />
+            <element signature="e#0#828#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -628,12 +590,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#7350#7351#0" expanded="false" />
-            <element signature="e#7385#7386#0" expanded="false" />
-            <element signature="e#9939#9940#0" expanded="false" />
-            <element signature="e#9981#9982#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -671,7 +628,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#829#0" expanded="true" />
+            <element signature="e#0#828#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -695,7 +652,7 @@
         <state relative-caret-position="405">
           <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
           <folding>
-            <element signature="e#0#829#0" expanded="true" />
+            <element signature="e#0#828#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -734,7 +691,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#829#0" expanded="true" />
+            <element signature="e#0#828#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -930,7 +887,7 @@
         <state relative-caret-position="210">
           <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
           <folding>
-            <element signature="e#0#829#0" expanded="true" />
+            <element signature="e#0#828#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -943,26 +900,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/xpathMyVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3165">
-          <caret line="221" column="11" lean-forward="false" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
-          <folding>
-            <element signature="e#7350#7351#0" expanded="false" />
-            <element signature="e#7385#7386#0" expanded="false" />
-            <element signature="e#9939#9940#0" expanded="false" />
-            <element signature="e#9981#9982#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/xqueryMyVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-604">
           <caret line="345" column="39" lean-forward="false" selection-start-line="344" selection-start-column="39" selection-end-line="345" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/xpathMyVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="404" column="38" lean-forward="true" selection-start-line="404" selection-start-column="38" selection-end-line="404" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
