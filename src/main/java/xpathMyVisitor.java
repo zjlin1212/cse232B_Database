@@ -4,8 +4,6 @@ import java.util.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -18,22 +16,6 @@ import org.w3c.dom.Attr;
 public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     ArrayList<Node>  currentNodes  = new ArrayList<>();
-    boolean hasAttr;
-    /*
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    private ArrayList<Node> unique(ArrayList<Node> nodes) {
-        ArrayList<Node> res = new ArrayList<>();
-        for(Node n : nodes) {
-            if(!res.contains(n))
-                res.add(n);
-        }
-        return res;
-    }
-
 
     @Override
     public ArrayList<Node> visitDoc(xpathParser.DocContext ctx) {
@@ -167,11 +149,11 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitAttName(xpathParser.AttNameContext ctx) {
-        //hasAttr = true;
+
         ArrayList<Node> result = new ArrayList<>();
         for(Node node : currentNodes){
             Element element = (Element) node;
-            //String value = element.getAttribute(ctx.String().getText());
+
             if(element.hasAttributes()){
                 NamedNodeMap map = element.getAttributes();
                 for(int i = 0; i < map.getLength(); i++) {
@@ -202,12 +184,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
         currentNodes = result;
         return result;
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
     @Override
     public ArrayList<Node> visitRpPrthsis(xpathParser.RpPrthsisContext ctx) {
 
@@ -257,18 +234,6 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     }
 
 
-//        ArrayList<Node> resultAtrfil= visit(ctx.filter());
-//        if (hasAttr) {
-//            currentNodes = resultAtrfil;
-//            hasAttr= false;
-//            return resultAtrfil;
-//        }
-//        else if (resultAtrfil.isEmpty()) {
-//            currentNodes = new ArrayList<>();
-//            return new ArrayList<>();
-//        }
-//        else return result;
-
 
     public ArrayList<Node> visitText(xpathParser.TextContext ctx) {
         ArrayList<Node> result = new ArrayList<>();
@@ -283,12 +248,7 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
         return result;
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
+
     @Override
      public ArrayList<Node> visitCurrent(xpathParser.CurrentContext ctx) {
         return currentNodes;
@@ -296,13 +256,6 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
 
 
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
     @Override public ArrayList<Node> visitRpAnd(xpathParser.RpAndContext ctx) {
 
             ArrayList<Node> currentCopy = new ArrayList<Node>(currentNodes);
@@ -383,10 +336,6 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
             return result;
         }
 
-        //        ArrayList<Node> temp = new ArrayList<>(currentNodes);
-        //        ArrayList<Node> res = visit(ctx.rp());
-        //        currentNodes = temp;
-        //        return res;
     }
 
     @Override
@@ -413,11 +362,5 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
     }
 
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
     @Override public ArrayList<Node> visitFilename(xpathParser.FilenameContext ctx) { return visitChildren(ctx); }
 }

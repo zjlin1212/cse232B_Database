@@ -2,10 +2,8 @@
  * Created by lin on 2/1/17.
  */
 
-import java.io.*;
-import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.w3c.dom.Node;
 
@@ -15,9 +13,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.*;
+import java.util.ArrayList;
 
 
-public class xPathtest {
+public class xQuerytest {
     private static int visitTree(String Xpath) throws Exception{
         ANTLRInputStream input = new ANTLRInputStream(Xpath);
         xpathLexer lexer = new xpathLexer(input);
