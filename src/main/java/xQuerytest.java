@@ -54,7 +54,7 @@ public class  xQuerytest {
 
     public static void main(String[] args) {
         String Filepath  = "testFile";
-        ArrayList<String> files = new ArrayList<>();
+        String xquery = "";
         String line;
 
         try {
@@ -62,13 +62,13 @@ public class  xQuerytest {
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             while ((line = br.readLine()) != null) {
-                files.add(line);
+                xquery = xquery + " " + line;
             }
         }   catch(Exception e) {
 
         }
         try {
-                int sz = visitTree(files.get(0));
+                int sz = visitTree(xquery);
                 System.out.println("Total Node size is " + sz);
 
         }
