@@ -147,6 +147,7 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
         currentNodes = new ArrayList<>(temp);
         ArrayList<Node> resultWithDup = visit(ctx.rp());
         ArrayList<Node> result = new ArrayList<>();
+
         for (Node n : resultWithDup) {
             if (!result.contains(n)) {
                 result.add(n);
@@ -159,9 +160,10 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
     public ArrayList<Node> visitXq2Slash(xqueryParser.Xq2SlashContext ctx) {
         ArrayList<Node> result = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
-        visit(ctx.xq());
-        result.addAll(currentNodes);
-        queue.addAll(currentNodes);
+        ArrayList<Node> startNodes = visit(ctx.xq());
+
+        result.addAll(startNodes);
+        queue.addAll(startNodes);
         while (!queue.isEmpty()) {
             Node cur = queue.poll();
             for (int i = 0; i < cur.getChildNodes().getLength(); i++) {
@@ -178,6 +180,7 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
                 resultNoDup.add(n);
             }
         }
+
         return resultNoDup;
     }
 
