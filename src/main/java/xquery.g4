@@ -1,6 +1,9 @@
+
 grammar xquery;
 import xpath;
 
+query:
+    xq EOF;
 
 xq:
     var                 #XqVar
@@ -10,8 +13,8 @@ xq:
 |   xq ',' xq           #XqComma
 |   xq  '/' rp          #XqSlash
 |   xq '//' rp          #Xq2Slash
-|   '<' String '>' '{' xq '}' '</' String '>'   #XqMakeElement
-|   forClause letClause? whereClause? returnClause    #XqFor
+|   '<' String '>'  '{'  xq  '}' '<' '/' String '>'   #XqMakeElement
+|   forClause letClause?  whereClause?  returnClause  #XqFor
 |   letClause xq       #XqLet
 ;
 
@@ -46,4 +49,22 @@ cond:
 |   'not' cond          #CondNot
 ;
 
-StringConstant: '"'+[a-zA-Z0-9,.!?; _'"-]+'"';
+
+
+INT :        [0-9]+;
+LPAR:       '(';
+RPAR:       ')';
+LBRAC:      '[';
+RBRAC:      ']';
+MINUS:      '-';
+PLUS:       '+';
+DOT:        '.';
+MUL:        '*';
+DOTDOT:     '..';
+AT:         '@';
+COMMA:      ',';
+PATHSEP:	'/';
+ABRPATH:	'//';
+EQUL:	'=';
+DEQUL:	'==';
+StringConstant:  '"'+[a-zA-Z0-9,.A!?:; ''""-]+'"';

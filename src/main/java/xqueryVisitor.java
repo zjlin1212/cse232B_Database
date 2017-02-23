@@ -10,6 +10,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface xqueryVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link xqueryParser#query}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuery(xqueryParser.QueryContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code XqComma}
 	 * labeled alternative in {@link xqueryParser#xq}.
 	 * @param ctx the parse tree

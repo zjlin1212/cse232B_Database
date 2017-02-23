@@ -1,7 +1,3 @@
-/* xpath.g4
- *
- *
- */
 grammar xpath;
 
 
@@ -36,11 +32,28 @@ filter:
 |   'not' filter        #FilterNot
 ;
 
-doc: 'doc' '(' '"' filename '"' ')';
-filename: String ('.' String)?;
+doc: 'doc' '(' '"' filename '"'')';
+filename: String '.' String;
 
 
-String:[a-zA-Z0-9_-]+;
+WS:     [ \t\r\n]+ -> skip;
 
-
+String:      [a-zA-Z0-9_-]+;
+INT :        [0-9]+;
+LPAR:       '(';
+RPAR:       ')';
+LBRAC:      '[';
+RBRAC:      ']';
+MINUS:      '-';
+PLUS:       '+';
+DOT:        '.';
+MUL:        '*';
+DOTDOT:     '..';
+AT:         '@';
+COMMA:      ',';
+PATHSEP:	'/';
+ABRPATH:	'//';
+EQUL:	'=';
+DEQUL:	'==';
+NEWLINE  :  '\r'? '\n';
 

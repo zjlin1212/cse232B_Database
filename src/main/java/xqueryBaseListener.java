@@ -15,6 +15,18 @@ public class xqueryBaseListener implements xqueryListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterQuery(xqueryParser.QueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuery(xqueryParser.QueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXqComma(xqueryParser.XqCommaContext ctx) { }
 	/**
 	 * {@inheritDoc}

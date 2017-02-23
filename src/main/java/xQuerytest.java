@@ -17,16 +17,17 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class xQuerytest {
+public class  xQuerytest {
+    
     private static int visitTree(String Xpath) throws Exception{
         ANTLRInputStream input = new ANTLRInputStream(Xpath);
-        xpathLexer lexer = new xpathLexer(input);
+        xqueryLexer lexer = new xqueryLexer(input);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        xpathParser parser = new xpathParser(tokens);
+        xqueryParser parser = new xqueryParser(tokens);
 
-        ParseTree tree = parser.ap();
-        xpathMyVisitor eval = new xpathMyVisitor();
+        ParseTree tree = parser.query();
+        xqueryMyVisitor eval = new xqueryMyVisitor();
 
         ArrayList<Node> res = eval.visit(tree);
         writeFile(res, "output.xml");

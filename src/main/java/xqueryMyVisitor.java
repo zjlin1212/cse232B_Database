@@ -35,7 +35,10 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
     }
 
-
+    @Override
+    public ArrayList<Node> visitQuery(xqueryParser.QueryContext ctx) {
+        return visit(ctx.xq());
+    }
     @Override
     public ArrayList<Node> visitDoc(xqueryParser.DocContext ctx) {
         ArrayList<Node> result = new ArrayList<>();
@@ -344,7 +347,7 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
     }
 
 
-    private ArrayList<Node> recurForClusOnIdx(xqueryParser.XqForContext ctx , int idx, ArrayList<Node> result) {
+    private void recurForClusOnIdx(xqueryParser.XqForContext ctx , int idx, ArrayList<Node> result) {
 
         int sz = ctx.forClause().var().size();
 
@@ -365,7 +368,7 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
             }
             varMap = mapHistory.pop();
 
-            return result;
+            return;
 
         }
 
@@ -383,10 +386,10 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
                 varMap.put(ctx.forClause().var(idx).getText(), tmpList);
 
-                result.addAll(recurForClusOnIdx(ctx, idx + 1, result));
+                recurForClusOnIdx(ctx, idx + 1, result);
                 varMap = mapHistory.pop();
             }
-            return result;
+            return;
         }
     }
 
