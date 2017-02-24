@@ -1,4 +1,4 @@
-// Generated from xquery.g4 by ANTLR 4.6
+// Generated from /Users/kaiyizhang/2016fall/232b/cse232B_Database/src/main/java/xquery.g4 by ANTLR 4.6
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -9,12 +9,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface xqueryVisitor<T> extends ParseTreeVisitor<T> {
-	/**
-	 * Visit a parse tree produced by {@link xqueryParser#query}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuery(xqueryParser.QueryContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code XqComma}
 	 * labeled alternative in {@link xqueryParser#xq}.
@@ -186,18 +180,6 @@ public interface xqueryVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitApCurrent(xqueryParser.ApCurrentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link xqueryParser#doc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDoc(xqueryParser.DocContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xqueryParser#filename}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFilename(xqueryParser.FilenameContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xqueryParser#rp}.
 	 * @param ctx the parse tree
@@ -323,4 +305,16 @@ public interface xqueryVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFilterIs(xqueryParser.FilterIsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xqueryParser#doc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoc(xqueryParser.DocContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xqueryParser#filename}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFilename(xqueryParser.FilenameContext ctx);
 }

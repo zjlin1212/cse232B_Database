@@ -22,8 +22,9 @@ public class xpathMyVisitor extends xpathBaseVisitor<ArrayList<Node>> {
 
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dB = null;
-        String seeme = ctx.filename().getText();
-        File fileXml = new File(ctx.filename().getText());
+        String fname = ctx.filename().getText();
+        fname = fname.substring(1, fname.length() - 1);
+        File fileXml = new File(fname);
         Document doc = null;
         ArrayList<Node> result = new ArrayList<>();
 

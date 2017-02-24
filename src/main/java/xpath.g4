@@ -4,8 +4,12 @@ grammar xpath;
 ap:
     doc  '/' rp     #apRoot
 |   doc '//' rp     #apCurrent
-
 ;
+
+doc: 'doc' '(' filename  ')';
+filename: StringConstant;
+
+
 rp:
     String          #TagName
 |   '*'             #All
@@ -32,28 +36,12 @@ filter:
 |   'not' filter        #FilterNot
 ;
 
-doc: 'doc' '(' '"' filename '"'')';
-filename: String '.' String;
 
+
+String: LETTER (LETTER | DIGIT)*;
+fragment LETTER: [a-zA-Z_];
+fragment DIGIT: [0-9];
 
 WS:     [ \t\r\n]+ -> skip;
-
-String:      [a-zA-Z0-9_-]+;
-INT :        [0-9]+;
-LPAR:       '(';
-RPAR:       ')';
-LBRAC:      '[';
-RBRAC:      ']';
-MINUS:      '-';
-PLUS:       '+';
-DOT:        '.';
-MUL:        '*';
-DOTDOT:     '..';
-AT:         '@';
-COMMA:      ',';
-PATHSEP:	'/';
-ABRPATH:	'//';
-EQUL:	'=';
-DEQUL:	'==';
-NEWLINE  :  '\r'? '\n';
+StringConstant:  '"'+[a-zA-Z0-9,.!?:; _'"-]+'"';
 

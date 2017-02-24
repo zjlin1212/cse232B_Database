@@ -51,20 +51,4 @@ cond:
 
 
 
-INT :        [0-9]+;
-LPAR:       '(';
-RPAR:       ')';
-LBRAC:      '[';
-RBRAC:      ']';
-MINUS:      '-';
-PLUS:       '+';
-DOT:        '.';
-MUL:        '*';
-DOTDOT:     '..';
-AT:         '@';
-COMMA:      ',';
-PATHSEP:	'/';
-ABRPATH:	'//';
-EQUL:	'=';
-DEQUL:	'==';
-StringConstant:  '"'+[a-zA-Z0-9,.A!?:; ''""-]+'"';
+

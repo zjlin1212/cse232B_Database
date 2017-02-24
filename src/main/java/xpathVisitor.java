@@ -24,6 +24,18 @@ public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitApCurrent(xpathParser.ApCurrentContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoc(xpathParser.DocContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFilename(xpathParser.FilenameContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
@@ -149,16 +161,4 @@ public interface xpathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFilterIs(xpathParser.FilterIsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDoc(xpathParser.DocContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link xpathParser#filename}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFilename(xpathParser.FilenameContext ctx);
 }

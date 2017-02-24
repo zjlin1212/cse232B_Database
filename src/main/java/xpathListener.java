@@ -31,6 +31,26 @@ public interface xpathListener extends ParseTreeListener {
 	 */
 	void exitApCurrent(xpathParser.ApCurrentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoc(xpathParser.DocContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xpathParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoc(xpathParser.DocContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void enterFilename(xpathParser.FilenameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xpathParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void exitFilename(xpathParser.FilenameContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xpathParser#rp}.
 	 * @param ctx the parse tree
@@ -246,24 +266,4 @@ public interface xpathListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFilterIs(xpathParser.FilterIsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void enterDoc(xpathParser.DocContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xpathParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void exitDoc(xpathParser.DocContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xpathParser#filename}.
-	 * @param ctx the parse tree
-	 */
-	void enterFilename(xpathParser.FilenameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xpathParser#filename}.
-	 * @param ctx the parse tree
-	 */
-	void exitFilename(xpathParser.FilenameContext ctx);
 }
