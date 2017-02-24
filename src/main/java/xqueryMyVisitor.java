@@ -212,6 +212,16 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
         currentNodes = temp;
         ArrayList<Node> result2 = visit(ctx.xq(1));
         currentNodes = temp;
+        if(result1 == null && result2 == null) {
+            ArrayList<Node> list = new ArrayList<>();
+            Node tmp = null;
+            list.add(tmp);
+            return list;
+        }
+
+        if(result1 == null || result2 == null)
+            return new ArrayList<>();
+
         for (Node node0 : result1) {
             for (Node node1 : result2) {
                 if (node0.isEqualNode(node1)) {
@@ -301,8 +311,12 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitCondSome(xqueryParser.CondSomeContext ctx) {
+        int sz = ctx.var().size();
         for (int i = 0; i < ctx.var().size(); i++) {
-            varMap.put(ctx.var(i).getText(), visit(ctx.xq(i)));
+            String v = ctx.var(i).getText();
+            ArrayList<Node> s = visit(ctx.xq(i));
+            //varMap.put(ctx.var(i).getText(), visit(ctx.xq(i)));
+            varMap.put(v, s);
         }
         return visit(ctx.cond());
     }
