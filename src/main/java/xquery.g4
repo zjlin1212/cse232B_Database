@@ -16,6 +16,14 @@ xq:
 |   '<' String '>'  '{'  xq  '}' '<' '/' String '>'   #XqMakeElement
 |   forClause letClause?  whereClause?  returnClause  #XqFor
 |   letClause xq       #XqLet
+|   joinClause          #XqJoin
+;
+
+joinClause:
+'join' '(' xq ',' xq ',' attrList ',' attrList ')'
+;
+
+attrList: '[' String (',' String)* ']'
 ;
 
 forClause:

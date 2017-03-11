@@ -20,7 +20,9 @@ import java.util.ArrayList;
 public class  xQuerytest {
     
     private static int visitTree(String Xpath) throws Exception{
-        ANTLRInputStream input = new ANTLRInputStream(Xpath);
+    //private static int visitTree(String Xpath) {
+
+    ANTLRInputStream input = new ANTLRInputStream(Xpath);
         xqueryLexer lexer = new xqueryLexer(input);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -68,12 +70,16 @@ public class  xQuerytest {
 
         }
         try {
-                int sz = visitTree(xquery);
-                System.out.println("Total Node size is " + sz);
+            int sz = visitTree(xquery);
+
+            System.out.println("Total Node size is " + sz);
 
         }
         catch (Exception e){
 
         }
+        //int sz = visitTree(xquery);
+        //System.out.println("Total Node size is " + sz);
+
     }
 }

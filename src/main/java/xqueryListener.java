@@ -65,6 +65,18 @@ public interface xqueryListener extends ParseTreeListener {
 	 */
 	void exitXqParenthesis(xqueryParser.XqParenthesisContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code XqJoin}
+	 * labeled alternative in {@link xqueryParser#xq}.
+	 * @param ctx the parse tree
+	 */
+	void enterXqJoin(xqueryParser.XqJoinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code XqJoin}
+	 * labeled alternative in {@link xqueryParser#xq}.
+	 * @param ctx the parse tree
+	 */
+	void exitXqJoin(xqueryParser.XqJoinContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code XqSlash}
 	 * labeled alternative in {@link xqueryParser#xq}.
 	 * @param ctx the parse tree
@@ -136,6 +148,26 @@ public interface xqueryListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXqLet(xqueryParser.XqLetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinClause(xqueryParser.JoinClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinClause(xqueryParser.JoinClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#attrList}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttrList(xqueryParser.AttrListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#attrList}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttrList(xqueryParser.AttrListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link xqueryParser#forClause}.
 	 * @param ctx the parse tree

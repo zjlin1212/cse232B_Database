@@ -411,16 +411,6 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
         }
     }
 
-
-/*
-    @Override
-    public ArrayList<Node> visitForClause(xqueryParser.ForClauseContext ctx) {
-        ArrayList<Node> result = new ArrayList<>();
-        result.addAll(recurForClusOnIdx(ctx, 0));
-        return result;
-    }
-    */
-
     @Override
     public ArrayList<Node> visitAll(xqueryParser.AllContext ctx) {
 
@@ -714,4 +704,8 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
     public ArrayList<Node> visitFilename(xqueryParser.FilenameContext ctx) {
         return visitChildren(ctx);
     }
+    public ArrayList<Node> visitXqJoin(xqueryParser.XqJoinContext ctx) {
+        return visitChildren(ctx);
+    }
+
 }
