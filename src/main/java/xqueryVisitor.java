@@ -99,11 +99,11 @@ public interface xqueryVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJoinClause(xqueryParser.JoinClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link xqueryParser#attrList}.
+	 * Visit a parse tree produced by {@link xqueryParser#attrNames}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAttrList(xqueryParser.AttrListContext ctx);
+	T visitAttrNames(xqueryParser.AttrNamesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link xqueryParser#forClause}.
 	 * @param ctx the parse tree

@@ -1,9 +1,14 @@
 import java.io.File;
+import java.io.StringWriter;
 import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -704,8 +709,93 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
     public ArrayList<Node> visitFilename(xqueryParser.FilenameContext ctx) {
         return visitChildren(ctx);
     }
+
+
+
     public ArrayList<Node> visitXqJoin(xqueryParser.XqJoinContext ctx) {
-        return visitChildren(ctx);
+
+        ArrayList<Node> res1 = visit(ctx.joinClause().xq(0));
+        int attrSize = ctx.joinClause().attrNames(0).String().size();
+        ArrayList<HashMap<String, ArrayList<Node>>> maps1 = new ArrayList<>();
+
+        for (int i = 0; i < attrSize; i++) {
+            String attrName = ctx.joinClause().attrNames(0).String(i).getText();
+            HashMap<String, ArrayList<Node>> attr2Tuples = new HashMap<>();
+            for (Node n : res1) {
+                Node keyNode = ((Element) n).getElementsByTagName(attrName).item(0);
+                String key = nodeToString(keyNode);
+                key = key.substring(2 + attrName.length(), key.length() - 3 - attrName.length());
+                if (!attr2Tuples.containsKey(key)) {
+                    ArrayList<Node> tuples = new ArrayList<>();
+                    attr2Tuples.put(key, tuples);
+                }
+                attr2Tuples.get(key).add(n.cloneNode(true));
+            }
+            maps1.add(attr2Tuples);
+        }
+
+        ArrayList<Node> res2 = visit(ctx.joinClause().xq(1));
+        ArrayList<Node> curResult = new ArrayList<>();
+        ArrayList<Node> result = new ArrayList<>();
+
+        for (Node n : res2) {
+            for (int i = 0; i < attrSize; i++) {
+                String attrName = ctx.joinClause().attrNames(1).String(i).getText();
+                Node keyNode = ((Element) n).getElementsByTagName(attrName).item(0);
+                String key = nodeToString(keyNode);
+                key = key.substring(2 + attrName.length(), key.length() - 3 - attrName.length());
+                if (!maps1.get(i).containsKey(key)) {
+                    curResult.clear();
+                    break;
+                }
+                if (i == 0) {
+                    curResult.addAll(maps1.get(i).get(key));
+                } else {
+                    ArrayList<Node> tmpResult = new ArrayList<>();
+                    ArrayList<Node> tuples = maps1.get(i).get(key);
+                    for (Node tuple : tuples) {
+                        if (curResult.contains(tuple))
+                            tmpResult.add(tuple);
+                    }
+                    curResult = tmpResult;
+                    if (curResult.isEmpty())
+                        break;
+                }
+            }
+            if (!curResult.isEmpty()) {
+                int childNum = n.getChildNodes().getLength();
+                for (Node node : curResult) {
+                    for (int i = 0; i < childNum; i++) {
+                        node.appendChild(n.getChildNodes().item(i).cloneNode(true));
+                    }
+                }
+
+                result.addAll(curResult);
+                curResult.clear();
+            }
+
+        }
+        //currentNodes = result;
+        return result;
+    }
+
+
+
+    private String nodeToString(Node n){
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = null;
+        StringWriter writer = new StringWriter();
+        try {
+            transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            DOMSource source = new DOMSource(n);
+            transformer.transform(source, new StreamResult(writer));
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
     }
 
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class  xQuerytest {
     
     private static int visitTree(String Xpath) throws Exception{
-    //private static int visitTree(String Xpath) {
+   // private static int visitTree(String Xpath) {
 
     ANTLRInputStream input = new ANTLRInputStream(Xpath);
         xqueryLexer lexer = new xqueryLexer(input);

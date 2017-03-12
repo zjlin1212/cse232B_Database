@@ -20,10 +20,10 @@ xq:
 ;
 
 joinClause:
-'join' '(' xq ',' xq ',' attrList ',' attrList ')'
+'join' '(' xq ',' xq ',' attrNames ',' attrNames ')'
 ;
 
-attrList: '[' String (',' String)* ']'
+attrNames: '[' String (',' String)* ']'
 ;
 
 forClause:

@@ -107,7 +107,7 @@ public class xqueryBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAttrList(xqueryParser.AttrListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAttrNames(xqueryParser.AttrNamesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

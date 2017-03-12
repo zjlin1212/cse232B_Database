@@ -22,12 +22,12 @@ public class xqueryParser extends Parser {
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, String=36, WS=37, StringConstant=38;
 	public static final int
-		RULE_query = 0, RULE_xq = 1, RULE_joinClause = 2, RULE_attrList = 3, RULE_forClause = 4, 
-		RULE_letClause = 5, RULE_whereClause = 6, RULE_returnClause = 7, RULE_var = 8, 
-		RULE_cond = 9, RULE_ap = 10, RULE_doc = 11, RULE_filename = 12, RULE_rp = 13, 
-		RULE_filter = 14;
+		RULE_query = 0, RULE_xq = 1, RULE_joinClause = 2, RULE_attrNames = 3, 
+		RULE_forClause = 4, RULE_letClause = 5, RULE_whereClause = 6, RULE_returnClause = 7, 
+		RULE_var = 8, RULE_cond = 9, RULE_ap = 10, RULE_doc = 11, RULE_filename = 12, 
+		RULE_rp = 13, RULE_filter = 14;
 	public static final String[] ruleNames = {
-		"query", "xq", "joinClause", "attrList", "forClause", "letClause", "whereClause", 
+		"query", "xq", "joinClause", "attrNames", "forClause", "letClause", "whereClause", 
 		"returnClause", "var", "cond", "ap", "doc", "filename", "rp", "filter"
 	};
 
@@ -599,11 +599,11 @@ public class xqueryParser extends Parser {
 		public XqContext xq(int i) {
 			return getRuleContext(XqContext.class,i);
 		}
-		public List<AttrListContext> attrList() {
-			return getRuleContexts(AttrListContext.class);
+		public List<AttrNamesContext> attrNames() {
+			return getRuleContexts(AttrNamesContext.class);
 		}
-		public AttrListContext attrList(int i) {
-			return getRuleContext(AttrListContext.class,i);
+		public AttrNamesContext attrNames(int i) {
+			return getRuleContext(AttrNamesContext.class,i);
 		}
 		public JoinClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -643,11 +643,11 @@ public class xqueryParser extends Parser {
 			setState(86);
 			match(T__2);
 			setState(87);
-			attrList();
+			attrNames();
 			setState(88);
 			match(T__2);
 			setState(89);
-			attrList();
+			attrNames();
 			setState(90);
 			match(T__1);
 			}
@@ -663,33 +663,33 @@ public class xqueryParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AttrListContext extends ParserRuleContext {
+	public static class AttrNamesContext extends ParserRuleContext {
 		public List<TerminalNode> String() { return getTokens(xqueryParser.String); }
 		public TerminalNode String(int i) {
 			return getToken(xqueryParser.String, i);
 		}
-		public AttrListContext(ParserRuleContext parent, int invokingState) {
+		public AttrNamesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_attrList; }
+		@Override public int getRuleIndex() { return RULE_attrNames; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof xqueryListener ) ((xqueryListener)listener).enterAttrList(this);
+			if ( listener instanceof xqueryListener ) ((xqueryListener)listener).enterAttrNames(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof xqueryListener ) ((xqueryListener)listener).exitAttrList(this);
+			if ( listener instanceof xqueryListener ) ((xqueryListener)listener).exitAttrNames(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof xqueryVisitor ) return ((xqueryVisitor<? extends T>)visitor).visitAttrList(this);
+			if ( visitor instanceof xqueryVisitor ) return ((xqueryVisitor<? extends T>)visitor).visitAttrNames(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AttrListContext attrList() throws RecognitionException {
-		AttrListContext _localctx = new AttrListContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_attrList);
+	public final AttrNamesContext attrNames() throws RecognitionException {
+		AttrNamesContext _localctx = new AttrNamesContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_attrNames);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

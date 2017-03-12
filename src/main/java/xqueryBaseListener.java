@@ -171,13 +171,13 @@ public class xqueryBaseListener implements xqueryListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAttrList(xqueryParser.AttrListContext ctx) { }
+	@Override public void enterAttrNames(xqueryParser.AttrNamesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAttrList(xqueryParser.AttrListContext ctx) { }
+	@Override public void exitAttrNames(xqueryParser.AttrNamesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

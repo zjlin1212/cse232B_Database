@@ -7,6 +7,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface xqueryListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link xqueryParser#query}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuery(xqueryParser.QueryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#query}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuery(xqueryParser.QueryContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code XqComma}
 	 * labeled alternative in {@link xqueryParser#xq}.
 	 * @param ctx the parse tree
@@ -54,6 +64,18 @@ public interface xqueryListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXqParenthesis(xqueryParser.XqParenthesisContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code XqJoin}
+	 * labeled alternative in {@link xqueryParser#xq}.
+	 * @param ctx the parse tree
+	 */
+	void enterXqJoin(xqueryParser.XqJoinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code XqJoin}
+	 * labeled alternative in {@link xqueryParser#xq}.
+	 * @param ctx the parse tree
+	 */
+	void exitXqJoin(xqueryParser.XqJoinContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code XqSlash}
 	 * labeled alternative in {@link xqueryParser#xq}.
@@ -126,6 +148,26 @@ public interface xqueryListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXqLet(xqueryParser.XqLetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinClause(xqueryParser.JoinClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinClause(xqueryParser.JoinClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#attrNames}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttrNames(xqueryParser.AttrNamesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#attrNames}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttrNames(xqueryParser.AttrNamesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link xqueryParser#forClause}.
 	 * @param ctx the parse tree
@@ -296,6 +338,26 @@ public interface xqueryListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitApCurrent(xqueryParser.ApCurrentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoc(xqueryParser.DocContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#doc}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoc(xqueryParser.DocContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link xqueryParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void enterFilename(xqueryParser.FilenameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link xqueryParser#filename}.
+	 * @param ctx the parse tree
+	 */
+	void exitFilename(xqueryParser.FilenameContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code All}
 	 * labeled alternative in {@link xqueryParser#rp}.
@@ -512,24 +574,4 @@ public interface xqueryListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFilterIs(xqueryParser.FilterIsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xqueryParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void enterDoc(xqueryParser.DocContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xqueryParser#doc}.
-	 * @param ctx the parse tree
-	 */
-	void exitDoc(xqueryParser.DocContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link xqueryParser#filename}.
-	 * @param ctx the parse tree
-	 */
-	void enterFilename(xqueryParser.FilenameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link xqueryParser#filename}.
-	 * @param ctx the parse tree
-	 */
-	void exitFilename(xqueryParser.FilenameContext ctx);
 }
