@@ -764,9 +764,15 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
                 } else {
                     ArrayList<Node> tmpResult = new ArrayList<>();
                     ArrayList<Node> tuples = maps1.get(i).get(key);
+                    HashSet<String> compareSet = new HashSet<>();
+                    for (Node x : curResult){
+                        String keyString = nodeToString(x);
+                        compareSet.add(keyString);
+                    }
                     for (Node tuple : tuples) {
-                        if (curResult.contains(tuple))
-                            tmpResult.add(tuple);
+                        String keyString = nodeToString(tuple);
+                        if (compareSet.contains(keyString))
+                            tmpResult.add(tuple.cloneNode(true));
                     }
                     curResult = tmpResult;
                     if (curResult.isEmpty())
