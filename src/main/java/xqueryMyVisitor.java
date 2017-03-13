@@ -141,8 +141,19 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
     @Override
     public ArrayList<Node> visitXqComma(xqueryParser.XqCommaContext ctx) {
+
+        HashMap<String, ArrayList<Node>> oldMap = new HashMap<>(varMap);
+        ArrayList<Node> temp = new ArrayList<>(currentNodes);
+
+
         ArrayList<Node> result = visit(ctx.xq(0));
-        result.addAll(visit(ctx.xq(1)));
+
+        varMap = new HashMap<>(oldMap);
+
+        ArrayList<Node> result2 = visit(ctx.xq(1));
+        result.addAll(result2);
+
+        varMap = new HashMap<>(oldMap);
         return result;
     }
 
@@ -765,17 +776,16 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
             if (!curResult.isEmpty()) {
                 int childNum = n.getChildNodes().getLength();
                 for (Node node : curResult) {
+                    Node tempnode = node.cloneNode(true);
                     for (int i = 0; i < childNum; i++) {
-                        node.appendChild(n.getChildNodes().item(i).cloneNode(true));
+                        tempnode.appendChild(n.getChildNodes().item(i).cloneNode(true));
                     }
+                    result.add(tempnode);
                 }
-
-                result.addAll(curResult);
                 curResult.clear();
             }
 
         }
-        //currentNodes = result;
         return result;
     }
 
