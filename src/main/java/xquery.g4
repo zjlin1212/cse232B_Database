@@ -10,9 +10,9 @@ xq:
 |   StringConstant      #XqString
 |   ap                  #XqAp
 |   '(' xq ')'          #XqParenthesis
-|   xq ',' xq           #XqComma
 |   xq  '/' rp          #XqSlash
 |   xq '//' rp          #Xq2Slash
+|   xq ',' xq           #XqComma
 |   '<' String '>'  '{'  xq  '}' '<' '/' String '>'   #XqMakeElement
 |   forClause letClause?  whereClause?  returnClause  #XqFor
 |   letClause xq       #XqLet

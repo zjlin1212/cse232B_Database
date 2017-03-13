@@ -29,7 +29,30 @@ public class  xQuerytest {
         xqueryParser parser = new xqueryParser(tokens);
 
         ParseTree tree = parser.query();
+
+        // rewrite
+        String rewriteQuery = rewrite(tree);
+        if(!rewriteQuery.isEmpty()) {
+            try {
+
+                BufferedWriter out = new BufferedWriter(new FileWriter("rewrittenQuery.txt"));
+                out.write(rewriteQuery);
+                out.close();
+            }
+            catch (IOException e)
+            {
+                System.out.println("Output Exception");
+            }
+            input = new ANTLRInputStream(rewriteQuery);
+            lexer = new xqueryLexer(input);
+            tokens = new CommonTokenStream(lexer);
+            parser = new xqueryParser(tokens);
+            tree = parser.query();
+        }
+
+
         xqueryMyVisitor eval = new xqueryMyVisitor();
+
 
         ArrayList<Node> res = eval.visit(tree);
         writeFile(res, "output.xml");
@@ -53,6 +76,9 @@ public class  xQuerytest {
         }
     }
 
+    private static String rewrite (ParseTree tree){
+
+    }
 
     public static void main(String[] args) {
         String Filepath  = "testFile";
