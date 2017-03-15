@@ -23,7 +23,7 @@ import java.util.HashSet;
 
 public class  xQuerytest {
     
-    private static int visitTree(String Xpath) throws Exception{
+    private static int visitTree(String Xpath) {
    // private static int visitTree(String Xpath) {
 
     ANTLRInputStream input = new ANTLRInputStream(Xpath);
@@ -34,32 +34,32 @@ public class  xQuerytest {
 
         ParseTree tree = parser.query();
 
-        // rewrite
-//        String rewriteQuery = rewrite(tree);
-//        if(!rewriteQuery.isEmpty()) {
-//            try {
-//
-//                BufferedWriter out = new BufferedWriter(new FileWriter("rewrittenQuery.txt"));
-//                out.write(rewriteQuery);
-//                out.close();
-//            }
-//            catch (IOException e)
-//            {
-//                System.out.println("Output Exception");
-//            }
-//            input = new ANTLRInputStream(rewriteQuery);
-//            lexer = new xqueryLexer(input);
-//            tokens = new CommonTokenStream(lexer);
-//            parser = new xqueryParser(tokens);
-//            tree = parser.query();
-//        }
+      // rewrite
+        String rewriteQuery = rewrite(tree);
+        if(!rewriteQuery.isEmpty()) {
+            try {
+
+                BufferedWriter out = new BufferedWriter(new FileWriter("rewrittenQuery.txt"));
+                out.write(rewriteQuery);
+                out.close();
+            }
+            catch (IOException e)
+            {
+                System.out.println("Output Exception");
+            }
+            input = new ANTLRInputStream(rewriteQuery);
+            lexer = new xqueryLexer(input);
+            tokens = new CommonTokenStream(lexer);
+            parser = new xqueryParser(tokens);
+            tree = parser.query();
+        }
 
 
         xqueryMyVisitor eval = new xqueryMyVisitor();
 
 
         ArrayList<Node> res = eval.visit(tree);
-        writeFile(res, "output.xml");
+        //writeFile(res, "output.xml");
 
         return res.size();
     }
@@ -109,8 +109,8 @@ public class  xQuerytest {
         else
             return "";
 
-        HashMap<String, HashMap<String, String>> var2set = new HashMap<>();
-        ArrayList<HashMap<String, String>> sets = new ArrayList<>();
+        HashMap<String, LinkedHashMap<String, String>> var2set = new HashMap<>();
+        ArrayList<LinkedHashMap<String, String>> sets = new ArrayList<>();
 
         for(int i = 0; i < forClause.getChildCount(); i++) {
             String var1Name = forClause.getChild(i).getText();
@@ -121,15 +121,15 @@ public class  xQuerytest {
                 String xqTreeName = xqTree.getText();
 
 
-                if(varTree.getText().contains("doc")) {
-                    HashMap<String, String> var2xq = new HashMap<>();
+                if(xqTreeName.contains("doc")) {
+                    LinkedHashMap<String, String> var2xq = new LinkedHashMap<>();
 
                     var2xq.put(varTreeName, xqTreeName);
                     sets.add(var2xq);
                     var2set.put(varTreeName, var2xq);
                 } else {
                     String parentVarName = xqTree.getChild(0).getText();
-                    HashMap<String, String> var2xq = var2set.get(parentVarName);
+                    LinkedHashMap<String, String> var2xq = var2set.get(parentVarName);
                     var2xq.put(varTreeName, xqTreeName);
                     var2set.put(varTreeName, var2xq);
                 }
@@ -141,7 +141,7 @@ public class  xQuerytest {
 
         String whereClauseString = whereClause.getChild(1).getText();
         ArrayList<String> conds = new ArrayList<>(Arrays.asList
-                                                (whereClauseString.split(" and ")));
+                                                (whereClauseString.split("and")));
         ArrayList<String> createSentence = new ArrayList<String>();
         ArrayList<String> whereSentence = new ArrayList<String>();
 
@@ -156,26 +156,28 @@ public class  xQuerytest {
 
             ArrayList<String> lBags = new ArrayList<>();
             ArrayList<String> rBags = new ArrayList<>();
-            HashMap<String, String> lset = null, rset = null;
+            LinkedHashMap<String, String> lset = null, rset = null;
 
             for(int i = 0; i < conds.size(); ) {
-                String[] vars = conds.get(i).split("eq");
+                String[] vars = conds.get(i).split("eq|=");
                 String var1 = vars[0];
                 String var2 = vars[1];
 
                 if(var2.charAt(0) != '$') {
                     //var eq constant
                     int setidx = sets.indexOf(var2set.get(var1));
+
+                    String s = var1 + " eq " + var2;
                     if(whereSentence.get(setidx) == "")
-                        whereSentence.set(setidx, "where " + conds.get(i));
+                        whereSentence.set(setidx, " where " + s);
                     else
-                        whereSentence.set(setidx,  whereSentence.get(setidx) + " and " + conds.get(i));
+                        whereSentence.set(setidx,  whereSentence.get(setidx) + " and " + s);
                     conds.remove(i);
                 }
 
                 else {
-                    HashMap<String, String> set1 = var2set.get(var1);
-                    HashMap<String, String> set2 = var2set.get(var2);
+                    LinkedHashMap<String, String> set1 = var2set.get(var1);
+                    LinkedHashMap<String, String> set2 = var2set.get(var2);
                     if (set1 == set2 && set1 != null) {
                         int setidx = sets.indexOf(set1);
                         whereSentence.set(setidx, whereSentence.get(setidx) + "\t" + conds.get(i));
@@ -211,22 +213,23 @@ public class  xQuerytest {
             }// for conds
             //if(lset == null)
             //
-            int lidx = sets.indexOf(lBags);
-            int ridx = sets.indexOf(rBags);
+            int lidx = sets.indexOf(lset);
+            int ridx = sets.indexOf(rset);
             String part1 = "";
             if(createSentence.get(lidx) == "") {
                 part1 = "for ";
                 for (String var: lset.keySet()) {
                     part1 = part1 + var + " in " + lset.get(var) + ",\n";
                 }
-
+                part1 = part1.substring(0, part1.length() - 2) + "\n";
                 part1 = part1 + whereSentence.get(lidx) + " ";
 
                 part1 = part1 +  "\n\t return <tuple>{\n\t";
                 for (String var: lset.keySet()) {
-                    part1 = part1 + "<" +  var + ">{" + var + "}</" + var + "> ,\n";
+                    part1 = part1 + "<" +  var.substring(1, var.length()) + ">{" + var + "}</"
+                                            + var.substring(1, var.length()) + ">,\n";
                 }
-                part1 = part1.substring(0, part1.length() - 3) + "\n\t}</tuple>" ;//remove , and \n
+                part1 = part1.substring(0, part1.length() - 2) + "\n\t}</tuple>" ;//remove , and \n
 
             } else {
                 part1 = createSentence.get(lidx);
@@ -238,18 +241,20 @@ public class  xQuerytest {
                 for (String var: rset.keySet()) {
                     part2 = part2 + var + " in " + rset.get(var) + ",\n";
                 }
+                part2 = part2.substring(0, part2.length() - 2) + "\n";
                 part2 = part2 + whereSentence.get(ridx) + " ";
 
                 part2 = part2 +  "\n\t return <tuple>{\n\t";
                 for (String var: rset.keySet()) {
-                    part2 = part2 + "<" +  var + ">{" + var + "}</" + var + "> ,\n";
+                    part2 = part2 + "<" +  var.substring(1, var.length()) + ">{" + var + "}</"
+                                                + var.substring(1, var.length()) + ">,\n";
                 }
-                part2 = part2.substring(0, part2.length() - 3)  + "\n\t}</tuple>";//remove , and \n
+                part2 = part2.substring(0, part2.length() - 2)  + "\n\t}</tuple>";//remove , and \n
             } else {
                 part2 = createSentence.get(ridx);
             }
 
-            String fullsentence = "join ( ";
+            String fullsentence = "join ( \n";
             fullsentence = fullsentence + part1 + ",\n " + part2 + ",\n";
 
             fullsentence += "[";
@@ -258,10 +263,11 @@ public class  xQuerytest {
            fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
            fullsentence = fullsentence + "],\t";
 
+            fullsentence += "[";
             for(String var : rBags)
                 fullsentence = fullsentence + var.substring(1, var.length()) + ",";
             fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
-            fullsentence = fullsentence + "],\n\t)";
+            fullsentence = fullsentence + "]\n\t)";
 
 
             lset.putAll(rset);
@@ -269,29 +275,43 @@ public class  xQuerytest {
                 lset.put(entry.getKey(), entry.getValue());
                 var2set.replace(entry.getKey(), lset);
             }
-            sets.remove(ridx);
+            createSentence.set(lidx, fullsentence);
+            whereSentence.set(lidx, "");
 
+            sets.remove(ridx);
             createSentence.remove(ridx);
             whereSentence.remove(ridx);
 
-            createSentence.set(lidx, fullsentence);
-            whereSentence.set(lidx, "");
+
         }
 
         String fullsentence = createSentence.get(0);
-        fullsentence = "for $tuple in" + fullsentence;
+        fullsentence = "for $tuple in " + fullsentence;
 
         returnClause = returnClause.getChild(1);
-        int retVarSz = returnClause.getChildCount();
-        for(int i = 0; i < retVarSz; i++) {
-            fullsentence
+        ArrayList<String> returnVars = new ArrayList<>();
+        String oriReturnSentence = returnClause.getText();
+        String tag = returnClause.getChild(1).getText();
+        for(int i = 0; i < oriReturnSentence.length(); i++) {
+            if(oriReturnSentence.charAt(i) == '$') {
+                int j = i;
+                while(j < oriReturnSentence.length() &&
+                        (oriReturnSentence.charAt(j) != ',' && oriReturnSentence.charAt(j) != '}' && ))
+                    j++;
+                returnVars.add(oriReturnSentence.substring(i + 1, j));
+                i = j;
+            }
         }
+        String returnSentence = " return <" + tag + "> { ";
+        for(String var : returnVars) {
+            returnSentence = returnSentence  +  "$tuple/" + var + "/*, ";
+        }
+        returnSentence = returnSentence.substring(0, returnSentence.length() - 2);
+        returnSentence = returnSentence + "} </" + tag + ">";
 
+        fullsentence = fullsentence + returnSentence;
 
-
-
-
-        return "";
+        return fullsentence;
 
     }
 
@@ -311,16 +331,16 @@ public class  xQuerytest {
 
         }
         try {
-            int sz = visitTree(xquery);
+            //int sz = visitTree(xquery);
 
-            System.out.println("Total Node size is " + sz);
+            //System.out.println("Total Node size is " + sz);
 
         }
         catch (Exception e){
 
         }
-        //int sz = visitTree(xquery);
-        //System.out.println("Total Node size is " + sz);
+        int sz = visitTree(xquery);
+        System.out.println("Total Node size is " + sz);
 
     }
 }

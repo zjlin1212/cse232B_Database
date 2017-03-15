@@ -1,10 +1,4 @@
-for
-    $b3 in doc("book.xml")//book,
-    $a3 in $b3/author,
-    $af3 in $a3/first/text(),
-    $al3 in $a3/last/text()
-   return <tuple>{
-                   <b3>{$b3}</b3>,
-                   <a3>{$a3}</a3>,
-                   <af3>{$af3}</af3>,
-                   <al3>{$al3}</al3>}</tuple>
+for $s in doc("j_caesar.xml")//SPEAKER, $a in doc("j_caesar.xml")//ACT,
+    $sp in $a//SPEAKER, $stxt in $s/text()
+where $sp eq $s and $stxt = "CAESAR"
+return <act> { $a/TITLE/text()} </act>
