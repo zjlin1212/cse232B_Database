@@ -136,6 +136,9 @@ public class  xQuerytest {
 
             }
         }
+        if(sets.size() < 2)
+            return "";
+
         String whereClauseString = whereClause.getChild(1).getText();
         ArrayList<String> conds = new ArrayList<>(Arrays.asList
                                                 (whereClauseString.split(" and ")));
@@ -160,21 +163,20 @@ public class  xQuerytest {
                 String var1 = vars[0];
                 String var2 = vars[1];
 
-                if(var1.charAt(0) != '$' ||  var2.charAt(0) != '$') {
-                    //constant eq var (or verse)
-                    int setidx = -1;
-                    if(var1.charAt(0) == '$')
-                        setidx = sets.indexOf(var2set.get(var1));
+                if(var2.charAt(0) != '$') {
+                    //var eq constant
+                    int setidx = sets.indexOf(var2set.get(var1));
+                    if(whereSentence.get(setidx) == "")
+                        whereSentence.set(setidx, "where " + conds.get(i));
                     else
-                        setidx = sets.indexOf(var2set.get(var2));
-                    whereSentence.set(setidx,  whereSentence.get(setidx) + "\t" + conds.get(i));
+                        whereSentence.set(setidx,  whereSentence.get(setidx) + " and " + conds.get(i));
                     conds.remove(i);
                 }
 
                 else {
                     HashMap<String, String> set1 = var2set.get(var1);
                     HashMap<String, String> set2 = var2set.get(var2);
-                    if (set1 == set2) {
+                    if (set1 == set2 && set1 != null) {
                         int setidx = sets.indexOf(set1);
                         whereSentence.set(setidx, whereSentence.get(setidx) + "\t" + conds.get(i));
                         conds.remove(i);
@@ -207,12 +209,84 @@ public class  xQuerytest {
                 }
 
             }// for conds
-            if(lset == null)
-                continue;
+            //if(lset == null)
+            //
+            int lidx = sets.indexOf(lBags);
+            int ridx = sets.indexOf(rBags);
+            String part1 = "";
+            if(createSentence.get(lidx) == "") {
+                part1 = "for ";
+                for (String var: lset.keySet()) {
+                    part1 = part1 + var + " in " + lset.get(var) + ",\n";
+                }
+
+                part1 = part1 + whereSentence.get(lidx) + " ";
+
+                part1 = part1 +  "\n\t return <tuple>{\n\t";
+                for (String var: lset.keySet()) {
+                    part1 = part1 + "<" +  var + ">{" + var + "}</" + var + "> ,\n";
+                }
+                part1 = part1.substring(0, part1.length() - 3) + "\n\t}</tuple>" ;//remove , and \n
+
+            } else {
+                part1 = createSentence.get(lidx);
+            }
+
+            String part2 = "";
+            if(createSentence.get(ridx) == "") {
+                part2 = "for ";
+                for (String var: rset.keySet()) {
+                    part2 = part2 + var + " in " + rset.get(var) + ",\n";
+                }
+                part2 = part2 + whereSentence.get(ridx) + " ";
+
+                part2 = part2 +  "\n\t return <tuple>{\n\t";
+                for (String var: rset.keySet()) {
+                    part2 = part2 + "<" +  var + ">{" + var + "}</" + var + "> ,\n";
+                }
+                part2 = part2.substring(0, part2.length() - 3)  + "\n\t}</tuple>";//remove , and \n
+            } else {
+                part2 = createSentence.get(ridx);
+            }
+
+            String fullsentence = "join ( ";
+            fullsentence = fullsentence + part1 + ",\n " + part2 + ",\n";
+
+            fullsentence += "[";
+            for(String var : lBags)
+                fullsentence = fullsentence + var.substring(1, var.length()) + ",";
+           fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
+           fullsentence = fullsentence + "],\t";
+
+            for(String var : rBags)
+                fullsentence = fullsentence + var.substring(1, var.length()) + ",";
+            fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
+            fullsentence = fullsentence + "],\n\t)";
 
 
+            lset.putAll(rset);
+            for(Map.Entry<String, String> entry : rset.entrySet()) {
+                lset.put(entry.getKey(), entry.getValue());
+                var2set.replace(entry.getKey(), lset);
+            }
+            sets.remove(ridx);
 
+            createSentence.remove(ridx);
+            whereSentence.remove(ridx);
+
+            createSentence.set(lidx, fullsentence);
+            whereSentence.set(lidx, "");
         }
+
+        String fullsentence = createSentence.get(0);
+        fullsentence = "for $tuple in" + fullsentence;
+
+        returnClause = returnClause.getChild(1);
+        int retVarSz = returnClause.getChildCount();
+        for(int i = 0; i < retVarSz; i++) {
+            fullsentence
+        }
+
 
 
 
