@@ -23,7 +23,7 @@ joinClause:
 'join' '(' xq ',' xq ',' attrNames ',' attrNames ')'
 ;
 
-attrNames: '[' String (',' String)* ']'
+attrNames: '[' String ? (',' String)* ']'
 ;
 
 forClause:

@@ -727,6 +727,8 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
         ArrayList<Node> res1 = visit(ctx.joinClause().xq(0));
         int attrSize = ctx.joinClause().attrNames(0).String().size();
+        ArrayList<Node> result = new ArrayList<>();
+
         ArrayList<HashMap<String, ArrayList<Node>>> maps1 = new ArrayList<>();
 
         for (int i = 0; i < attrSize; i++) {
@@ -747,7 +749,20 @@ public class xqueryMyVisitor extends xqueryBaseVisitor<ArrayList<Node>> {
 
         ArrayList<Node> res2 = visit(ctx.joinClause().xq(1));
         ArrayList<Node> curResult = new ArrayList<>();
-        ArrayList<Node> result = new ArrayList<>();
+
+        if(attrSize == 0) {
+            for (Node n2 : res2) {
+                int childNum = n2.getChildNodes().getLength();
+                    for (Node n1 : res1) {
+                        Node tempnode = n1.cloneNode(true);
+                        for (int i = 0; i < childNum; i++) {
+                            tempnode.appendChild(n2.getChildNodes().item(i).cloneNode(true));
+                        }
+                        result.add(tempnode);
+                    }
+            }
+            return result;
+        }
 
         for (Node n : res2) {
             for (int i = 0; i < attrSize; i++) {
