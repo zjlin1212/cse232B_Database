@@ -23,7 +23,7 @@ import java.util.HashSet;
 
 public class  xQuerytest {
     
-    private static int visitTree(String Xpath) {
+    private static int visitTree(String Xpath) throws  Exception{
    // private static int visitTree(String Xpath) {
 
     ANTLRInputStream input = new ANTLRInputStream(Xpath);
@@ -59,7 +59,7 @@ public class  xQuerytest {
 
 
         ArrayList<Node> res = eval.visit(tree);
-        //writeFile(res, "output.xml");
+        writeFile(res, "output.xml");
 
         return res.size();
     }
@@ -152,12 +152,12 @@ public class  xQuerytest {
 
         String remainWhere = "";
 
-        while(conds.size() > 0) {
+        while(createSentence.size() > 1) {
 
             ArrayList<String> lBags = new ArrayList<>();
             ArrayList<String> rBags = new ArrayList<>();
             LinkedHashMap<String, String> lset = null, rset = null;
-
+            int sz = conds.size();
             for(int i = 0; i < conds.size(); ) {
                 String[] vars = conds.get(i).split("eq|=");
                 String var1 = vars[0];
@@ -210,11 +210,19 @@ public class  xQuerytest {
                     }
                 }
 
-            }// for conds
-            //if(lset == null)
-            //
-            int lidx = sets.indexOf(lset);
-            int ridx = sets.indexOf(rset);
+            }
+
+            int lidx = 0, ridx = 1;
+            if(sz == 0) {
+                lset = sets.get(0);
+                rset = sets.get(1);
+                lidx = 0;
+                ridx = 1;
+            }
+            else {
+                lidx = sets.indexOf(lset);
+                ridx = sets.indexOf(rset);
+            }
             String part1 = "";
             if(createSentence.get(lidx) == "") {
                 part1 = "for ";
@@ -260,13 +268,16 @@ public class  xQuerytest {
             fullsentence += "[";
             for(String var : lBags)
                 fullsentence = fullsentence + var.substring(1, var.length()) + ",";
-           fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
-           fullsentence = fullsentence + "],\t";
+            if(fullsentence.charAt(fullsentence.length() - 1) == ',')
+                fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
+            fullsentence = fullsentence + "],\t";
 
             fullsentence += "[";
             for(String var : rBags)
                 fullsentence = fullsentence + var.substring(1, var.length()) + ",";
-            fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
+
+            if(fullsentence.charAt(fullsentence.length() - 1) == ',')
+                fullsentence = fullsentence.substring(0, fullsentence.length() - 1);
             fullsentence = fullsentence + "]\n\t)";
 
 
@@ -288,26 +299,58 @@ public class  xQuerytest {
         String fullsentence = createSentence.get(0);
         fullsentence = "for $tuple in " + fullsentence;
 
-        returnClause = returnClause.getChild(1);
-        ArrayList<String> returnVars = new ArrayList<>();
+
+
         String oriReturnSentence = returnClause.getText();
-        String tag = returnClause.getChild(1).getText();
-        for(int i = 0; i < oriReturnSentence.length(); i++) {
-            if(oriReturnSentence.charAt(i) == '$') {
-                int j = i;
-                while(j < oriReturnSentence.length() &&
-                        (oriReturnSentence.charAt(j) != ',' && oriReturnSentence.charAt(j) != '}' && ))
-                    j++;
-                returnVars.add(oriReturnSentence.substring(i + 1, j));
-                i = j;
+        String returnSentence = "";
+
+        while(oriReturnSentence.indexOf("$") != -1) {
+            int index = oriReturnSentence.indexOf("$");
+            returnSentence += oriReturnSentence.substring(0, index);
+            returnSentence += "$tuple/";
+            int j = index;
+            while(j < oriReturnSentence.length() &&
+                       (oriReturnSentence.charAt(j) != ',' && oriReturnSentence.charAt(j) != '}'
+                                               && oriReturnSentence.charAt(j) != '/'))
+            {
+               j++;
             }
+            returnSentence += oriReturnSentence.substring(index + 1, j);
+            returnSentence += "/*";
+
+            oriReturnSentence = oriReturnSentence.substring(j , oriReturnSentence.length());
+
         }
-        String returnSentence = " return <" + tag + "> { ";
-        for(String var : returnVars) {
-            returnSentence = returnSentence  +  "$tuple/" + var + "/*, ";
-        }
-        returnSentence = returnSentence.substring(0, returnSentence.length() - 2);
-        returnSentence = returnSentence + "} </" + tag + ">";
+
+        returnSentence += oriReturnSentence;
+
+
+       // String tag = returnClause.getChild(1).getText();
+        //  ArrayList<String> returnVars = new ArrayList<>();
+      //  String returnSentence = " return <" + tag + "> { ";
+
+
+
+
+//        for(int i = 0; i < oriReturnSentence.length(); i++) {
+//            if(oriReturnSentence.charAt(i) == '$') {
+//                int j = i;
+//                while(j < oriReturnSentence.length() &&
+//                        (oriReturnSentence.charAt(j) != ',' && oriReturnSentence.charAt(j) != '}'
+//                                                && oriReturnSentence.charAt(j) != '/'))
+//                    j++;
+//                //returnVars.add(oriReturnSentence.substring(i + 1, j));
+//                returnSentence = returnSentence + "$tuple/" +
+//                i = j;
+//            }
+//        }
+
+//        for(String var : returnVars) {
+//            returnSentence = returnSentence  +  "$tuple/" + var + "/*, ";
+//        }
+
+       // returnSentence = returnSentence.substring(0, returnSentence.length() - 2);
+        //returnSentence = returnSentence + "} </" + tag + ">";
 
         fullsentence = fullsentence + returnSentence;
 
@@ -331,16 +374,17 @@ public class  xQuerytest {
 
         }
         try {
-            //int sz = visitTree(xquery);
+            int sz = visitTree(xquery);
 
-            //System.out.println("Total Node size is " + sz);
+            System.out.println("Total Node size is " + sz);
+            System.out.print("Successfuly output");
 
         }
         catch (Exception e){
 
         }
-        int sz = visitTree(xquery);
-        System.out.println("Total Node size is " + sz);
+//        int sz = visitTree(xquery);
+//        System.out.println("Total Node size is " + sz);
 
     }
 }
