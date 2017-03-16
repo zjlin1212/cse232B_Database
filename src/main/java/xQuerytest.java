@@ -141,7 +141,7 @@ public class  xQuerytest {
 
         String whereClauseString = whereClause.getChild(1).getText();
         ArrayList<String> conds = new ArrayList<>(Arrays.asList
-                                                (whereClauseString.split("and")));
+                                                (whereClauseString.split("and|AND")));
         ArrayList<String> createSentence = new ArrayList<String>();
         ArrayList<String> whereSentence = new ArrayList<String>();
 
@@ -169,7 +169,7 @@ public class  xQuerytest {
 
                     String s = var1 + " eq " + var2;
                     if(whereSentence.get(setidx) == "")
-                        whereSentence.set(setidx, " where " + s);
+                        whereSentence.set(setidx, "where " + s);
                     else
                         whereSentence.set(setidx,  whereSentence.get(setidx) + " and " + s);
                     conds.remove(i);
@@ -225,16 +225,16 @@ public class  xQuerytest {
             }
             String part1 = "";
             if(createSentence.get(lidx) == "") {
-                part1 = "for ";
+                part1 = "for \n";
                 for (String var: lset.keySet()) {
-                    part1 = part1 + var + " in " + lset.get(var) + ",\n";
+                    part1 = part1 + "\t" + var + " in " + lset.get(var) + ",\n";
                 }
                 part1 = part1.substring(0, part1.length() - 2) + "\n";
                 part1 = part1 + whereSentence.get(lidx) + " ";
 
-                part1 = part1 +  "\n\t return <tuple>{\n\t";
+                part1 = part1 +  "\nreturn <tuple>{\n";
                 for (String var: lset.keySet()) {
-                    part1 = part1 + "<" +  var.substring(1, var.length()) + ">{" + var + "}</"
+                    part1 = part1 + "\t<" +  var.substring(1, var.length()) + ">{" + var + "}</"
                                             + var.substring(1, var.length()) + ">,\n";
                 }
                 part1 = part1.substring(0, part1.length() - 2) + "\n\t}</tuple>" ;//remove , and \n
@@ -245,16 +245,16 @@ public class  xQuerytest {
 
             String part2 = "";
             if(createSentence.get(ridx) == "") {
-                part2 = "for ";
+                part2 = "for \n";
                 for (String var: rset.keySet()) {
-                    part2 = part2 + var + " in " + rset.get(var) + ",\n";
+                    part2 = part2 + "\t"  + var + " in " + rset.get(var) + ",\n";
                 }
                 part2 = part2.substring(0, part2.length() - 2) + "\n";
                 part2 = part2 + whereSentence.get(ridx) + " ";
 
-                part2 = part2 +  "\n\t return <tuple>{\n\t";
+                part2 = part2 +  "\nreturn <tuple>{\n";
                 for (String var: rset.keySet()) {
-                    part2 = part2 + "<" +  var.substring(1, var.length()) + ">{" + var + "}</"
+                    part2 = part2 + "\t<" +  var.substring(1, var.length()) + ">{" + var + "}</"
                                                 + var.substring(1, var.length()) + ">,\n";
                 }
                 part2 = part2.substring(0, part2.length() - 2)  + "\n\t}</tuple>";//remove , and \n
@@ -263,7 +263,7 @@ public class  xQuerytest {
             }
 
             String fullsentence = "join ( \n";
-            fullsentence = fullsentence + part1 + ",\n " + part2 + ",\n";
+            fullsentence = fullsentence + part1 + ",\n" + part2 + ",\n";
 
             fullsentence += "[";
             for(String var : lBags)
@@ -324,35 +324,7 @@ public class  xQuerytest {
 
         returnSentence += oriReturnSentence;
 
-
-       // String tag = returnClause.getChild(1).getText();
-        //  ArrayList<String> returnVars = new ArrayList<>();
-      //  String returnSentence = " return <" + tag + "> { ";
-
-
-
-
-//        for(int i = 0; i < oriReturnSentence.length(); i++) {
-//            if(oriReturnSentence.charAt(i) == '$') {
-//                int j = i;
-//                while(j < oriReturnSentence.length() &&
-//                        (oriReturnSentence.charAt(j) != ',' && oriReturnSentence.charAt(j) != '}'
-//                                                && oriReturnSentence.charAt(j) != '/'))
-//                    j++;
-//                //returnVars.add(oriReturnSentence.substring(i + 1, j));
-//                returnSentence = returnSentence + "$tuple/" +
-//                i = j;
-//            }
-//        }
-
-//        for(String var : returnVars) {
-//            returnSentence = returnSentence  +  "$tuple/" + var + "/*, ";
-//        }
-
-       // returnSentence = returnSentence.substring(0, returnSentence.length() - 2);
-        //returnSentence = returnSentence + "} </" + tag + ">";
-
-        fullsentence = fullsentence + returnSentence;
+        fullsentence = fullsentence + "\n" + returnSentence;
 
         return fullsentence;
 
