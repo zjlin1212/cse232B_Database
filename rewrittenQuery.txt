@@ -1,39 +1,20 @@
 for $tuple in join ( 
-join ( 
 for 
-	$b1 in doc("book.xml")//book,
-	$a1 in $b1/author/first/text(),
-	$d1 in $b1/author/first/text(),
-	$c1 in $b1/author/first/text()
-where $a1 eq "W." and $c1 eq "W." 
-return <tuple>{
-	<b1>{$b1}</b1>,
-	<a1>{$a1}</a1>,
-	<d1>{$d1}</d1>,
-	<c1>{$c1}</c1>
-	}</tuple>,
-for 
-	$b2 in doc("book.xml")//book,
-	$a2 in $b2/author/first/text(),
-	$c2 in $b2/author/first/text()
-where $a2 eq "W." and $c2 eq "W." 
-return <tuple>{
-	<b2>{$b2}</b2>,
-	<a2>{$a2}</a2>,
-	<c2>{$c2}</c2>
-	}</tuple>,
-[a1],	[a2]
-	),
-for 
-	$b3 in doc("book.xml")//book,
-	$a3 in $b3/author/first/text(),
-	$c3 in $b3/author/first/text()
+	$a in doc("j_caesar.xml")//ACT,
+	$sp in $a//SPEAKER
  
 return <tuple>{
-	<b3>{$b3}</b3>,
-	<a3>{$a3}</a3>,
-	<c3>{$c3}</c3>
+	<a>{$a}</a>,
+	<sp>{$sp}</sp>
 	}</tuple>,
-[a2],	[a3]
+for 
+	$s in doc("j_caesar.xml")//SPEAKER,
+	$stxt in $s/text()
+where $stxt eq "CAESAR" 
+return <tuple>{
+	<s>{$s}</s>,
+	<stxt>{$stxt}</stxt>
+	}</tuple>,
+[sp],	[s]
 	)
-return<triplet>{$tuple/b1/*,$tuple/b2/*,$tuple/b3/*}</triplet>
+return<act>{$tuple/a/*/TITLE/text()}</act>
